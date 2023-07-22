@@ -77,13 +77,11 @@ CAN protocol is fixed to 500kBit/s (no FD).
 |     | 02 00 02 00 01 00 00 00 | ........ | ? [02:03] "02 00" batteries offline |
 |     | 02 00 02 00 01 00 00 00 | ........ | ? [04:05] "01 00" batteries blocked discharging |
 |     | 02 00 02 00 01 00 00 00 | ........ | ? [05:07] "01 00" batteries blocked charging |
-| 373 | EA 0C 01 0D 1F 01 22 01 | ......". | Cell voltage |
-|     |                         |          | [00:01] "EA 0C" (mV) 3.306V lowest cell voltage (bank2) |
-|     |                         |          | [02:03] "01 0D" (mV) 3.329V highest cell voltage (bank2) |
-|     |                         |          | ??? [04] "1F" seems to increment over time |
-|     |                         |          | ??? [05] "01" zero-indexed battery bank |
-|     |                         |          | ??? [06] "22" seems to increment over time |
-|     |                         |          | ??? [07] "01" zero-indexed battery bank |
+| 373 | EA 0C 01 0D 1F 01 22 01 | ......". | Cell Voltage and Temperature |
+|     |                         |          | [00:01] "EA 0C" (mV) 3.306V Lowest Cell Voltage, see 374 |
+|     |                         |          | [02:03] "01 0D" (mV) 3.329V Highest Cell Voltage, see 375 |
+|     |                         |          | [04:05] "1F 01" (K +1K) 15°C Minimum Cell Temperature, see 376 |
+|     |                         |          | [06:07] "22 01" (K +1K) 18°C Maximum Cell Temperature, see 377 |
 | 374 | 32 00 00 00 00 00 00 00 | 2....... | ??? seems to be battery bank with "Lowest Cell Voltage", see 373 |
 | 375 | 32 00 00 00 00 00 00 00 | 2....... | ??? seems to be battery bank with "Highest Cell Voltage", see 373 |
 | 376 | 32 00 00 00 00 00 00 00 | 2....... | ??? seems to be battery bank with "Minimum Cell Temperature", see 373 |
