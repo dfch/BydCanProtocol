@@ -9,9 +9,9 @@ CAN protocol is fixed to 500kBit/s (no FD).
 
 | Id  | Hex | Ascii | Description |
 | --- | ----------------------- | -------- | --- |
-| 305 | 00 00 00 00 00 00 00 00 | ........ | unknown |
-| 306 | 00 00 00 00 00 00 00 00 | ........ | unknown |
-| 307 | 12 34 56 78 56 49 43 00 | .4VxVIC. | unknown |
+| 305 | 00 00 00 00 00 00 00 00 | ........ | ? it seems when no battery present: 305 and 307 are sent rapdily |
+| 306 | 00 00 00 00 00 00 00 00 | ........ | ? it seems when battery is present: 305, 306 and 307 are sent periodically |
+| 307 | 12 34 56 78 56 49 43 00 | .4VxVIC. | ? it seems when no battery present: 305 and 307 are sent rapdily |
 
 ## BYD Communication
 | Id  | Hex | Ascii | Description |
@@ -30,9 +30,9 @@ CAN protocol is fixed to 500kBit/s (no FD).
 |     |                         |          | [02:03] "64 00" (%) 100% SoH |
 |     |                         |          | [04:05] *???* |
 |     |                         |          | [06:07] *???* |
-| 356 | BE 14 00 00 8C 00 00 00 | ........ | Voltage, Temperature |
+| 356 | BE 14 F9 FF 8C 00 00 00 | ........ | Voltage, Amps, Watts, Temperature |
 |     |                         |          | [00:01] "BE 14" (mV/10) 53.1V current voltage |
-|     |                         |          | [02:03] *???* probably consumed Amps or Watts |
+|     |                         |          | [02:03] "F9 FF" (A/10, signed) -0.7A consumed Amps; "-" discharge / "+" charge |
 |     |                         |          | [04:05] "8C 00" (°C/10) 14.0°C battery temperature |
 |     |                         |          | [06:07] *???* probably consumed Amps or Watts |
 | 357 |                         |          | *not seen* |
