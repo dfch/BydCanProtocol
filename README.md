@@ -120,7 +120,7 @@ CAN protocol is set to 500kBit/s (no FD).
 
 * Nr of modules blocking charge/discharge (not clear if supported)
 * Alarms
-* Alarms
+* Events
 * Consumed Watts
  
 ### Unclear
