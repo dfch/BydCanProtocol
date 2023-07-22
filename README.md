@@ -38,7 +38,7 @@ CAN protocol is set to 500kBit/s (no FD).
 | 357 |                         |          | *not seen* |
 | 358 |                         |          | *not seen* |
 | 359 |                         |          | *not seen* |
-| 35A | AA AA AA AA AA AA AA AA | ........ | ? recurring pattern, seems to be "start of transmission" or alarms/warnings, see SMA below|
+| 35A | AA AA AA AA AA AA AA AA | ........ | ? recurring pattern, seems to be "start of transmission" or alarms, see SMA below|
 | 35B | 00 00 00 00 00 00 00 00 | ........ | ??? always found to be null |
 | 35C |                         |          | *not seen* |
 | 35D |                         |          | *not seen* |
