@@ -1,2 +1,137 @@
-# BydCanProtocol
+# BYD Battery-Box CAN Protocol
 A "reverse engineering" of the BYD CAN protocol when used with Victron/Venus OS
+
+The following information has been discovered between a BYD Battery-Box Premium LVS B019 / v1.17 and a Victron Venus OS v3.00.
+
+CAN protocol is fixed to 500kBit/s (no FD).
+
+## Victron Communication
+
+| Id  | Hex | Ascii | Description |
+| --- | ----------------------- | -------- | --- |
+| 305 | 00 00 00 00 00 00 00 00 | ........ | unknown |
+| 306 | 00 00 00 00 00 00 00 00 | ........ | unknown |
+| 307 | 12 34 56 78 56 49 43 00 | .4VxVIC. | unknown |
+
+## BYD Communication
+| Id  | Hex | Ascii | Description |
+| --- | ----------------------- | -------- | --- |
+| 350 |                         |          | *not seen* |
+| 351 | 48 02 00 05 00 05 AE 01 | H....... | CVL, CCL, DCL, DVL |
+|     |                         |          | [00:01] "48 02" (mV/10) -- > 58.4V CVL |
+|     |                         |          | [02:03] "00 05" (A/10) 128.0A CCL |
+|     |                         |          | [04:05] "00 05" (A/10) 128.0A DCL |
+|     |                         |          | [06:07] "AE 01" (mV/10) 43.0V low battery voltage |
+| 352 |                         |          | *not seen* |
+| 353 |                         |          | *not seen* |
+| 354 |                         |          | *not seen* |
+| 355 | 43 00 64 00 00 00 00 00 | C.d..... | State of Charge, State of Health |
+|     |                         |          | [00:01] "43 00" (%) 67% SoC |
+|     |                         |          | [02:03] "64 00" (%) 100% SoH |
+|     |                         |          | [04:05] *???* |
+|     |                         |          | [06:07] *???* |
+| 356 | BE 14 00 00 8C 00 00 00 | ........ | Voltage, Temperature |
+|     |                         |          | [00:01] "BE 14" (mV/10) 53.1V current voltage |
+|     |                         |          | [02:03] *???* probably consumed Amps or Watts |
+|     |                         |          | [04:05] "8C 00" (°C/10) 14.0°C battery temperature |
+|     |                         |          | [06:07] *???* probably consumed Amps or Watts |
+| 357 |                         |          | *not seen* |
+| 358 |                         |          | *not seen* |
+| 359 |                         |          | *not seen* |
+| 35A | AA AA AA AA AA AA AA AA | ........ | ? recurring pattern, seems to be "start of block" |
+| 35B | 00 00 00 00 00 00 00 00 | ........ | ??? always found to be null |
+| 35C |                         |          | *not seen* |
+| 35D |                         |          | *not seen* |
+| 35E | 42 59 44 00 00 00 00 00 | BYD..... | Manufacturer |
+|     |                         |          | [00:02] "BYD" (string) "BYD" manufacturer identification
+|     |                         |          | [04:07] always found to be null
+| 35F | 4C 69 01 17 69 00 00 00 | Li..i... | Firmware version, Ah available |
+|     |                         |          | [00:01] ??? |
+|     |                         |          | [02:03] "01 17" v1.17 firmware version |
+|     |                         |          | ? [04:05] "69 00" (Ah) 105Ah capacity available |
+|     |                         |          | [06:07] ??? |
+| 360 | 00 00 00 00 00 00 00 00 | ........ | ??? always found to be null |
+| 361 |                         |          | *not seen* |
+| 362 |                         |          | *not seen* |
+| 363 |                         |          | *not seen* |
+| 364 |                         |          | *not seen* |
+| 365 |                         |          | *not seen* |
+| 366 |                         |          | *not seen* |
+| 367 |                         |          | *not seen* |
+| 368 |                         |          | *not seen* |
+| 369 |                         |          | *not seen* |
+| 36A |                         |          | *not seen* |
+| 36B |                         |          | *not seen* |
+| 36C |                         |          | *not seen* |
+| 36D |                         |          | *not seen* |
+| 36E |                         |          | *not seen* |
+| 36F |                         |          | *not seen* |
+| 370 |                         |          | *not seen* |
+| 371 |                         |          | *not seen* |
+| 372 | 02 00 00 00 00 00 00 00 | ........ | ??? 2 batteries onlin0, 0 batteries offline |
+| 373 | EA 0C 01 0D 1F 01 22 01 | ......". | Cell voltage |
+|     |                         |          | [00:01] "EA 0C" (mV) 3.306V lowest cell voltage (bank2) |
+|     |                         |          | [02:03] "01 0D" (mV) 3.329V highest cell voltage (bank2) |
+|     |                         |          | ??? [04] "1F" seems to increment over time |
+|     |                         |          | ??? [05] "01" zero-indexed battery bank |
+|     |                         |          | ??? [06] "22" seems to increment over time |
+|     |                         |          | ??? [07] "01" zero-indexed battery bank |
+| 374 | 32 00 00 00 00 00 00 00 | 2....... | ??? |
+| 375 | 32 00 00 00 00 00 00 00 | 2....... | ??? |
+| 376 | 32 00 00 00 00 00 00 00 | 2....... | ??? |
+| 377 | 31 00 00 00 00 00 00 00 | 1....... | ??? |
+| 378 | 40 08 00 00 2B 07 00 00 | @...+... | History Charged / Discharged Energy |
+|     |                         |          | [00:03] "40 08 00 00" (kWh/10) 211.2kWh Charged Energy |
+|     |                         |          | [04:07] "2B 07 00 00" (kWh/10) 183.5kWh Discharged Energy |
+| 379 | 9C 00 00 00 00 00 00 00 | ........ | Installed Ah |
+|     |                         |          | [00:01] "9C 00" (Ah) 156Ah |
+| 37A |                         |          | *not seen* |
+| 37B |                         |          | *not seen* |
+| 37C |                         |          | *not seen* |
+| 37D |                         |          | *not seen* |
+| 37E |                         |          | *not seen* |
+| 37F |                         |          | *not seen* |
+| 380 |                         |          | *not seen* |
+| 381 |                         |          | *not seen* |
+| 382 | 50 52 45 4D 49 55 4D 00 | PREMIUM. | Product identification |
+|     |                         |          | [00:06] "PREMIUM" (string) product identification |
+|     |                         |          | [07] always found to be null
+| 383 |                         |          | *not seen* |
+| 384 |                         |          | *not seen* |
+| 385 |                         |          | *not seen* |
+| 386 |                         |          | *not seen* |
+| 387 |                         |          | *not seen* |
+| 388 |                         |          | *not seen* |
+| 389 |                         |          | *not seen* |
+| 38A |                         |          | *not seen* |
+| 38B |                         |          | *not seen* |
+| 38C |                         |          | *not seen* |
+| 38D |                         |          | *not seen* |
+| 38E |                         |          | *not seen* |
+| 38F |                         |          | *not seen* |
+
+### What is missing?
+
+* Minimum Cell temperature (battery number and actual value)
+* Maximum cell temperature (battery number and actual value)
+* Nr of modules blocking charge/discharge (not clear if supported)
+* Alarms
+* Product ID
+
+### Unclear
+
+* Battery information in "Lowest cell voltage" (battery number)
+* Battery information in "Highest cell voltage (battery number)
+
+![image](https://github.com/dfch/BydCanProtocol/assets/8310360/fd1df1f5-c802-41c7-9ff3-1f68f695cdf0)
+
+![image](https://github.com/dfch/BydCanProtocol/assets/8310360/5eaee6eb-bb81-44ef-a22e-62d69963242a)
+
+![image](https://github.com/dfch/BydCanProtocol/assets/8310360/213ceb5c-c057-4ed3-9657-6a9f8539e8a1)
+
+![image](https://github.com/dfch/BydCanProtocol/assets/8310360/f4354565-231f-448a-81c7-6941101ef4ee)
+
+![image](https://github.com/dfch/BydCanProtocol/assets/8310360/fba35b97-368c-433b-9b05-abe23abda00a)
+
+![image](https://github.com/dfch/BydCanProtocol/assets/8310360/9f149474-2156-4844-aeab-aa28d0c17530)
+
