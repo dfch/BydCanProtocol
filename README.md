@@ -118,16 +118,15 @@ CAN protocol is fixed to 500kBit/s (no FD).
 
 ### What is missing?
 
-* Minimum Cell temperature (battery number and actual value)
-* Maximum cell temperature (battery number and actual value)
 * Nr of modules blocking charge/discharge (not clear if supported)
 * Alarms
 * Product ID
 
 ### Unclear
 
-* Battery information in "Lowest cell voltage" (battery number)
-* Battery information in "Highest cell voltage (battery number)
+---
+
+### How it looks like in Venus OS
 
 ![image](https://github.com/dfch/BydCanProtocol/assets/8310360/fd1df1f5-c802-41c7-9ff3-1f68f695cdf0)
 
