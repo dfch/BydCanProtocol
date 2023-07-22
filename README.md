@@ -1,4 +1,4 @@
-# BYD Battery-Box CAN Protocol
+# BYD Battery-Box Premium LVS CAN Protocol
 A "reverse engineering" of the BYD CAN protocol when used with Victron/Venus OS
 
 The following information has been discovered between a BYD Battery-Box Premium LVS B019 / v1.17 and a Victron Venus OS v3.00.
