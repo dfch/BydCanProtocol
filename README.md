@@ -46,7 +46,7 @@ CAN protocol is fixed to 500kBit/s (no FD).
 |     |                         |          | [00:02] "BYD" (string) "BYD" manufacturer identification
 |     |                         |          | [04:07] always found to be null
 | 35F | 4C 69 01 17 69 00 00 00 | Li..i... | Firmware version, Ah available |
-|     |                         |          | [00:01] ??? |
+|     |                         |          | [00:01] "4C 69" ??? product code, always seen that value   |
 |     |                         |          | [02:03] "01 17" v1.17 firmware version |
 |     |                         |          | ? [04:05] "69 00" (Ah) 105Ah capacity available |
 |     |                         |          | [06:07] ??? |
@@ -68,7 +68,15 @@ CAN protocol is fixed to 500kBit/s (no FD).
 | 36F |                         |          | *not seen* |
 | 370 |                         |          | *not seen* |
 | 371 |                         |          | *not seen* |
-| 372 | 02 00 00 00 00 00 00 00 | ........ | ??? 2 batteries onlin0, 0 batteries offline |
+| 372 | 02 00 00 00 00 00 00 00 | ........ | |
+|     |                         | ........ | ??? 2 batteries onlin0, 0 batteries offline |
+|     |                         | ........ | the BYD system sent these message upon first power up: |
+|     | 02 00 02 00 01 00 00 00 | ........ | Frame 01 |
+|     | 02 00 00 00 00 00 00 00 | ........ | Frame 02 + consecutive frames |
+|     | 02 00 02 00 01 00 00 00 | ........ | ? [00:01] "02 00" batteries total |
+|     | 02 00 02 00 01 00 00 00 | ........ | ? [02:03] "02 00" batteries offline |
+|     | 02 00 02 00 01 00 00 00 | ........ | ? [04:05] "01 00" batteries blocked discharging |
+|     | 02 00 02 00 01 00 00 00 | ........ | ? [05:07] "01 00" batteries blocked charging |
 | 373 | EA 0C 01 0D 1F 01 22 01 | ......". | Cell voltage |
 |     |                         |          | [00:01] "EA 0C" (mV) 3.306V lowest cell voltage (bank2) |
 |     |                         |          | [02:03] "01 0D" (mV) 3.329V highest cell voltage (bank2) |
@@ -76,10 +84,10 @@ CAN protocol is fixed to 500kBit/s (no FD).
 |     |                         |          | ??? [05] "01" zero-indexed battery bank |
 |     |                         |          | ??? [06] "22" seems to increment over time |
 |     |                         |          | ??? [07] "01" zero-indexed battery bank |
-| 374 | 32 00 00 00 00 00 00 00 | 2....... | ??? |
-| 375 | 32 00 00 00 00 00 00 00 | 2....... | ??? |
-| 376 | 32 00 00 00 00 00 00 00 | 2....... | ??? |
-| 377 | 31 00 00 00 00 00 00 00 | 1....... | ??? |
+| 374 | 32 00 00 00 00 00 00 00 | 2....... | ??? seems to be battery bank with "Lowest Cell Voltage", see 373 |
+| 375 | 32 00 00 00 00 00 00 00 | 2....... | ??? seems to be battery bank with "Highest Cell Voltage", see 373 |
+| 376 | 32 00 00 00 00 00 00 00 | 2....... | ??? seems to be battery bank with "Minimum Cell Temperature", see 373 |
+| 377 | 31 00 00 00 00 00 00 00 | 1....... | ??? seems to be battery bank with "Maximum Cell Temperature", see 373 |
 | 378 | 40 08 00 00 2B 07 00 00 | @...+... | History Charged / Discharged Energy |
 |     |                         |          | [00:03] "40 08 00 00" (kWh/10) 211.2kWh Charged Energy |
 |     |                         |          | [04:07] "2B 07 00 00" (kWh/10) 183.5kWh Discharged Energy |
