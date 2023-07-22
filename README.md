@@ -120,11 +120,12 @@ CAN protocol is set to 500kBit/s (no FD).
 
 * Nr of modules blocking charge/discharge (not clear if supported)
 * Alarms
-* Product ID
-
+* Alarms
+* Consumed Watts
+ 
 ### Unclear
 
----
+* Product ID (maybe 0x35F [00:01])
 
 ### How it looks like in Venus OS
 
