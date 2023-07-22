@@ -34,7 +34,7 @@ CAN protocol is fixed to 500kBit/s (no FD).
 |     |                         |          | [00:01] "BE 14" (mV/10) 53.1V current voltage |
 |     |                         |          | [02:03] "F9 FF" (A/10, signed) -0.7A consumed Amps; "-" discharge / "+" charge |
 |     |                         |          | [04:05] "8C 00" (°C/10) 14.0°C battery temperature |
-|     |                         |          | [06:07] *???* definitely consumed Watts |
+|     |                         |          | [06:07] *???* definitely not consumed Watts |
 | 357 |                         |          | *not seen* |
 | 358 |                         |          | *not seen* |
 | 359 |                         |          | *not seen* |
