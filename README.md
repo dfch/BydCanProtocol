@@ -30,7 +30,7 @@ CAN protocol is set to 500kBit/s (no FD).
 |     |                         |          | [02:03] "64 00" (%) 100% SoH |
 |     |                         |          | [04:05] *???* |
 |     |                         |          | [06:07] *???* |
-| 356 | BE 14 F9 FF 8C 00 00 00 | ........ | Voltage, Amps, Watts, Temperature |
+| 356 | BE 14 F9 FF 8C 00 00 00 | ........ | Voltage, Amps, Temperature |
 |     |                         |          | [00:01] "BE 14" (mV/10) 53.1V current voltage |
 |     |                         |          | [02:03] "F9 FF" (A/10, signed) -0.7A consumed Amps; "-" discharge / "+" charge |
 |     |                         |          | [04:05] "8C 00" (°C/10) 14.0°C battery temperature |
@@ -38,7 +38,7 @@ CAN protocol is set to 500kBit/s (no FD).
 | 357 |                         |          | *not seen* |
 | 358 |                         |          | *not seen* |
 | 359 |                         |          | *not seen* |
-| 35A | AA AA AA AA AA AA AA AA | ........ | ? recurring pattern, seems to be "start of block" |
+| 35A | AA AA AA AA AA AA AA AA | ........ | ? recurring pattern, seems to be "start of transmission" or keep-alive|
 | 35B | 00 00 00 00 00 00 00 00 | ........ | ??? always found to be null |
 | 35C |                         |          | *not seen* |
 | 35D |                         |          | *not seen* |
