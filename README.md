@@ -76,7 +76,7 @@ CAN protocol is set to 500kBit/s (no FD).
 |     | 02 00 02 00 01 00 00 00 | ........ | ? [00:01] "02 00" batteries total |
 |     | 02 00 02 00 01 00 00 00 | ........ | ? [02:03] "02 00" batteries offline |
 |     | 02 00 02 00 01 00 00 00 | ........ | ? [04:05] "01 00" batteries blocked discharging |
-|     | 02 00 02 00 01 00 00 00 | ........ | ? [05:07] "01 00" batteries blocked charging |
+|     | 02 00 02 00 01 00 00 00 | ........ | ? [06:07] "00 00" batteries blocked charging |
 | 373 | EA 0C 01 0D 1F 01 22 01 | ......". | Cell Voltage and Temperature |
 |     |                         |          | [00:01] "EA 0C" (mV) 3.306V Lowest Cell Voltage, see 374 |
 |     |                         |          | [02:03] "01 0D" (mV) 3.329V Highest Cell Voltage, see 375 |
