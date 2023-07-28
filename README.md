@@ -69,8 +69,8 @@ CAN protocol is set to 500kBit/s (no FD).
 | 370 |                         |          | *not seen* |
 | 371 |                         |          | *not seen* |
 | 372 | 02 00 00 00 00 00 00 00 | ........ | |
-|     |                         | ........ | ??? 2 batteries onlin0, 0 batteries offline |
-|     |                         | ........ | the BYD system sent these message upon first power up: |
+|     |                         | ........ | ??? 2 batteries online, 0 batteries offline |
+|     |                         | ........ | the BYD system sent these frames upon first power up: |
 |     | 02 00 02 00 01 00 00 00 | ........ | Frame 01 |
 |     | 02 00 00 00 00 00 00 00 | ........ | Frame 02 + consecutive frames |
 |     | 02 00 02 00 01 00 00 00 | ........ | ? [00:01] "02 00" batteries total |
