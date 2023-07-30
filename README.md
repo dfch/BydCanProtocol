@@ -66,7 +66,7 @@ CAN protocol is set to 500kBit/s (no FD).
 |     |                         |          | [00:02] "BYD" (string) "BYD" manufacturer identification
 |     |                         |          | [04:07] always found to be null
 | 35F | 4C 69 01 17 69 00 00 00 | Li..i... | Firmware version, Ah available |
-|     |                         |          | [00:01] "4C 69" ??? product code, always seen that value |
+|     |                         |          | [00:01] "4C 69" product code, always seen that value |
 |     |                         |          | [02:03] "01 17" v1.17 firmware version |
 |     |                         |          | ? [04:05] "69 00" (Ah) 105Ah capacity available |
 |     |                         |          | [06:07] ??? |
@@ -90,22 +90,22 @@ CAN protocol is set to 500kBit/s (no FD).
 | 371 |                         |          | *not seen* |
 | 372 | 02 00 00 00 00 00 00 00 | ........ | |
 |     |                         | ........ | ??? 2 batteries online, 0 batteries offline |
-|     |                         | ........ | the BYD system sent these frames upon first power up: |
+|     | 02 00                   | ........ | [00:01] "04 00" batteries online |
+|     |                         | ........ | [02:03] ??? |
+|     |                         | ........ | [04:05] ??? |
+|     |                   01 00 | ........ | [06:07] "01 00" batteries offline |
+|     |                         | ........ | BYD system sent these frames upon first power up: |
 |     | 02 00 02 00 01 00 00 00 | ........ | Frame 01 |
 |     | 02 00 00 00 00 00 00 00 | ........ | Frame 02 + consecutive frames |
-|     | 02 00 02 00 01 00 00 00 | ........ | ? [00:01] "02 00" batteries total |
-|     | 02 00 02 00 01 00 00 00 | ........ | ? [02:03] "02 00" batteries offline |
-|     | 02 00 02 00 01 00 00 00 | ........ | ? [04:05] "01 00" batteries blocked discharging |
-|     | 02 00 02 00 01 00 00 00 | ........ | ? [06:07] "00 00" batteries blocked charging |
 | 373 | EA 0C 01 0D 1F 01 22 01 | ......". | Cell Voltage and Temperature |
 |     |                         |          | [00:01] "EA 0C" (mV) 3.306V Lowest Cell Voltage, see 374 |
 |     |                         |          | [02:03] "01 0D" (mV) 3.329V Highest Cell Voltage, see 375 |
 |     |                         |          | [04:05] "1F 01" (K +1K) 15°C Minimum Cell Temperature, see 376 |
 |     |                         |          | [06:07] "22 01" (K +1K) 18°C Maximum Cell Temperature, see 377 |
-| 374 | 32 00 00 00 00 00 00 00 | 2....... | Battery bank with "Lowest Cell Voltage", see 373 |
-| 375 | 32 00 00 00 00 00 00 00 | 2....... | Battery bank with "Highest Cell Voltage", see 373 |
-| 376 | 32 00 00 00 00 00 00 00 | 2....... | Battery bank with "Minimum Cell Temperature", see 373 |
-| 377 | 31 00 00 00 00 00 00 00 | 1....... | Battery bank with "Maximum Cell Temperature", see 373 |
+| 374 | 32 00 00 00 00 00 00 00 | 2....... | Cell name with "Lowest Cell Voltage", see 373 |
+| 375 | 32 00 00 00 00 00 00 00 | 2....... | Cell name with "Highest Cell Voltage", see 373 |
+| 376 | 32 00 00 00 00 00 00 00 | 2....... | Cell name with "Minimum Cell Temperature", see 373 |
+| 377 | 31 00 00 00 00 00 00 00 | 1....... | Cell name with "Maximum Cell Temperature", see 373 |
 | 378 | 40 08 00 00 2B 07 00 00 | @...+... | History Charged / Discharged Energy |
 |     |                         |          | [00:03] "40 08 00 00" (kWh/10) 211.2kWh Charged Energy |
 |     |                         |          | [04:07] "2B 07 00 00" (kWh/10) 183.5kWh Discharged Energy |
