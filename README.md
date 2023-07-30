@@ -90,7 +90,7 @@ CAN protocol is set to 500kBit/s (no FD).
 | 371 |                         |          | *not seen* |
 | 372 | 02 00 00 00 00 00 00 00 | ........ | |
 |     |                         | ........ | 2 batteries online, 0 batteries offline |
-|     | 02 00                   | ........ | [00:01] "04 00" batteries online |
+|     | 02 00                   | ........ | [00:01] "02 00" batteries online |
 |     |                         | ........ | [02:03] *???*, see below |
 |     |                         | ........ | [04:05] *???*, see below |
 |     |                   01 00 | ........ | [06:07] "01 00" batteries offline |
