@@ -28,13 +28,13 @@ CAN protocol is set to 500kBit/s (no FD).
 | 355 | 43 00 64 00 00 00 00 00 | C.d..... | State of Charge, State of Health |
 |     |                         |          | [00:01] "43 00" (%) 67% SoC |
 |     |                         |          | [02:03] "64 00" (%) 100% SoH |
-|     |                         |          | [04:05] *???* |
-|     |                         |          | [06:07] *???* |
+|     |                         |          | [04:05] always null, *???* |
+|     |                         |          | [06:07] always null, *???* |
 | 356 | BE 14 F9 FF 8C 00 00 00 | ........ | Voltage, Amps, Temperature |
 |     |                         |          | [00:01] "BE 14" (mV/10) 53.1V current voltage |
 |     |                         |          | [02:03] "F9 FF" (A/10, signed) -0.7A consumed Amps; "-" discharge / "+" charge |
-|     |                         |          | [04:05] "8C 00" (°C/10) 14.0°C battery temperature |
-|     |                         |          | [06:07] *???* definitely not consumed Watts |
+|     |                         |          | [04:05] "8C 00" (°C/10, signed) 14.0°C battery temperature |
+|     |                         |          | [06:07] always null, *???* definitely not Watts |
 | 357 |                         |          | *not seen* |
 | 358 |                         |          | *not seen* |
 | 359 |                         |          | *not seen* |
@@ -91,8 +91,8 @@ CAN protocol is set to 500kBit/s (no FD).
 | 372 | 02 00 00 00 00 00 00 00 | ........ | |
 |     |                         | ........ | ??? 2 batteries online, 0 batteries offline |
 |     | 02 00                   | ........ | [00:01] "04 00" batteries online |
-|     |                         | ........ | [02:03] ??? |
-|     |                         | ........ | [04:05] ??? |
+|     |                         | ........ | [02:03] *???* |
+|     |                         | ........ | [04:05] *???* |
 |     |                   01 00 | ........ | [06:07] "01 00" batteries offline |
 |     |                         | ........ | BYD system sent these frames upon first power up: |
 |     | 02 00 02 00 01 00 00 00 | ........ | Frame 01 |
