@@ -28,6 +28,7 @@ When emulating a BYD battery it seems to be sufficient to just periodically send
 Things to note:
 
 * Frames sent from Victron seem to be ignorable. We can just start sending the frames at any time.
+* I did not check if the order of the frames is important. The above sequence seems to work.
 * If frames are not sent completeley or properly, Venus OS tends to recognise the sender as "Pylontech" or "CAN bus BMS".
 * If frames are not sent frequently enough, Venus OS interprets the sender as being disconnected (offering to *remove* the device).
 * "Redetect battery" in Venus OS seems to send some frames to the "battery". It seems to be sufficient to just keep on sending the above frames (no other sequence needed).
