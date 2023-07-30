@@ -5,6 +5,33 @@ The following information has been discovered between a BYD Battery-Box Premium 
 
 CAN protocol is set to 500kBit/s (no FD). All frames are sent with 8 bytes length (zero padded).
 
+When emulating a BYD battery it seems to be sufficient to just periodically send the following frames with a `1000ms` delay:
+
+1. 0x35E
+2. 0x382
+3. 0x35F
+4. 0x35A
+5. 0x35B
+6. 0x351
+7. 0x355
+8. 0x356
+9. 0x360
+10. 0x372
+11. 0x373
+12. 0x374
+13. 0x375
+14. 0x376
+15. 0x377
+16. 0x378
+17. 0x379
+
+Things to note:
+
+* Frames sent from Victron seem to be ignorable. We can just start sending the frames at any time.
+* If frames are not sent completeley or properly, Venus OS tends to recognise the sender as "Pylontech" or "CAN bus BMS".
+* If frames are not sent frequently enough, Venus OS interprets the sender as being disconnected (offering to *remove* the device).
+* "Redetect battery" in Venus OS seems to send some frames to the "battery". It seems to be sufficient to just keep on sending the above frames (no other sequence needed).
+
 ## Victron Communication
 
 | Id  | Hex | Ascii | Description |
