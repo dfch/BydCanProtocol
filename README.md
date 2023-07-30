@@ -1,4 +1,5 @@
 # BYD Battery-Box Premium LVS CAN Protocol
+
 A "reverse engineering" of the BYD Battery-Box Premium LVS CAN protocol when used with Victron/Venus OS.
 
 The following information has been discovered between a BYD Battery-Box Premium LVS B019 / v1.23 and a Victron Venus OS v3.00. Battery-Box consist of 2 batteries in 1 tower (48V, 2* 78Ah).
@@ -32,8 +33,10 @@ Things to note:
 * If frames are not sent completeley or properly, Venus OS tends to recognise the sender as "Pylontech" or "CAN bus BMS".
 * If frames are not sent frequently enough, Venus OS interprets the sender as being disconnected (offering to *remove* the device).
 * "Redetect battery" in Venus OS seems to send some frames to the "battery". It seems to be sufficient to just keep on sending the above frames (no other sequence needed).
+* All information has been dumped on a Raspberry 4 with Venus OS v3.00 (as written above) and a RS485 CAN HAT with `candump`.
+* Emulation of the battery has beend done from an Espressif ESP32 (and S2, S3) with a TJA1051 transceiver.
 
-## Victron Communication
+## Victron Communication / Identifiers
 
 | Id  | Hex | Ascii | Description |
 | --- | ----------------------- | -------- | --- |
@@ -41,7 +44,7 @@ Things to note:
 | 306 | 00 00 00 00 00 00 00 00 | ........ | ? it seems when battery is present: 305, 306 and 307 are sent periodically |
 | 307 | 12 34 56 78 56 49 43 00 | .4VxVIC. | ? it seems when no battery present: 305 and 307 are sent rapdily |
 
-## BYD Communication
+## BYD Communication / Identifiers
 | Id  | Hex | Ascii | Description |
 | --- | ----------------------- | -------- | --- |
 | 350 |                         |          | *not seen* |
