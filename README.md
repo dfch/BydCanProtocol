@@ -161,10 +161,12 @@ CAN protocol is set to 500kBit/s (no FD).
 
 ![image](https://github.com/dfch/BydCanProtocol/assets/8310360/9f149474-2156-4844-aeab-aa28d0c17530)
 
-## Comparison to the SMA protocol
+## Similarities with the SMA protocol
 
 After I finished documenting the protocol, I stumbled across a document about the SMA CAN protocol "Technical Information:
 Connecting Batteries with external Battery Management System to SUNNY ISLAND 6.0H-11" ("SMA CAN protocol.pdf"). Here is a table with some of their CAN ids - which seem to be similar to BYD.
+
+*HiResSOC* 0x355 [04:07] and *Events* 0x35B do not seem to be supported on BYD.
 
 ![image](https://github.com/dfch/BydCanProtocol/assets/8310360/83f8146b-ed54-4deb-baa8-ca7557dd9377)
 
