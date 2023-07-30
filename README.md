@@ -34,32 +34,32 @@ CAN protocol is set to 500kBit/s (no FD).
 |     |                         |          | [00:01] "BE 14" (mV/10) 53.1V current voltage |
 |     |                         |          | [02:03] "F9 FF" (A/10, signed) -0.7A consumed Amps; "-" discharge / "+" charge |
 |     |                         |          | [04:05] "8C 00" (°C/10, signed) 14.0°C battery temperature |
-|     |                         |          | [06:07] always null, *???* definitely not Watts |
+|     |                         |          | [06:07] always found to be null, *???* definitely not Watts |
 | 357 |                         |          | *not seen* |
 | 358 |                         |          | *not seen* |
 | 359 |                         |          | *not seen* |
-| 35A | AA AA AA AA AA AA AA AA | ........ | Alarms and Warnings, 'AA' means OK, see SMA below |
-|     | 10                      | ........ | [00] Low battery voltage: Alarm |
-|     |             10          | ........ | [04] Low battery voltage: Warning |
-|     | 04                      | ........ | [00] High battery voltage : Alarm |
-|     |             04          | ........ | [04] High battery voltage : Warning |
-|     |       01                | ........ | [02] High charge current: Alarm |
-|     |                   01    | ........ | [06] High charge current: Warning |
-|     |    40                   | ........ | [01] High discharge current: Alarm |
-|     |                40       | ........ | [05] High discharge current: Warning |
-|     |    01                   | ........ | [01] Low temperature: Alarm |
-|     |                01       | ........ | [05] Low temperature: Warning |
-|     | 40                      | ........ | [00] High temperature: Alarm |
-|     |             40          | ........ | [04] High temperature: Warning |
-|     |    10                   | ........ | [01] Low charge temperature: Alarm |
-|     |                10       | ........ | [05] Low charge temperature: Warning |
-|     |    04                   | ........ | [01] High charge temperature: Alarm |
-|     |                04       | ........ | [05] High charge temperature: Warning |
-|     |       40                | ........ | [02] Internal failure: Alarm |
-|     |                   40    | ........ | [06] Internal failure: Warning |
-|     |          01             | ........ | [03] Cell imbalance: Alarm |
-|     |                      01 | ........ | [07] Cell imbalance: Warning |
-| 35B | 00 00 00 00 00 00 00 00 | ........ | ? always found to be null, see SMA below |
+| 35A | AA AA AA AA AA AA AA AA | ........ | Alarms and Warnings, bit field, 'AA' means OK |
+|     | 10 .. .. .. .. .. .. .. | ........ | [00] "10" Low battery voltage: Alarm |
+|     | .. .. .. .. 10 .. .. .. | ........ | [04] "10" Low battery voltage: Warning |
+|     | 04 .. .. .. .. .. .. .. | ........ | [00] "04" High battery voltage : Alarm |
+|     | .. .. .. .. 04 .. .. .. | ........ | [04] "04" High battery voltage : Warning |
+|     | .. .. 01 .. .. .. .. .. | ........ | [02] "01" High charge current: Alarm |
+|     | .. .. .. .. .. .. 01 .. | ........ | [06] "01" High charge current: Warning |
+|     | .. 40 .. .. .. .. .. .. | ........ | [01] "40" High discharge current: Alarm |
+|     | .. .. .. .. .. 40 .. .. | ........ | [05] "40" High discharge current: Warning |
+|     | .. 01 .. .. .. .. .. .. | ........ | [01] "01" Low temperature: Alarm |
+|     | .. .. .. .. .. 01 .. .. | ........ | [05] "01" Low temperature: Warning |
+|     | 40 .. .. .. .. .. .. .. | ........ | [00] "40" High temperature: Alarm |
+|     | .. .. .. .. 40 .. .. .. | ........ | [04] "40" High temperature: Warning |
+|     | .. 10 .. .. .. .. .. .. | ........ | [01] "10" Low charge temperature: Alarm |
+|     | .. .. .. .. .. 10 .. .. | ........ | [05] "10" Low charge temperature: Warning |
+|     | .. 04 .. .. .. .. .. .. | ........ | [01] "04" High charge temperature: Alarm |
+|     | .. .. .. .. .. 04 .. .. | ........ | [05] "04" High charge temperature: Warning |
+|     | .. .. 40 .. .. .. .. .. | ........ | [02] "40" Internal failure: Alarm |
+|     | .. .. .. .. .. .. 40 .. | ........ | [06] "40" Internal failure: Warning |
+|     | .. .. .. 01 .. .. .. .. | ........ | [03] "01" Cell imbalance: Alarm |
+|     | .. .. .. .. .. .. .. 01 | ........ | [07] "01" Cell imbalance: Warning |
+| 35B | 00 00 00 00 00 00 00 00 | ........ | *???* always found to be null |
 | 35C |                         |          | *not seen* |
 | 35D |                         |          | *not seen* |
 | 35E | 42 59 44 00 00 00 00 00 | BYD..... | Manufacturer |
@@ -68,9 +68,9 @@ CAN protocol is set to 500kBit/s (no FD).
 | 35F | 4C 69 01 17 69 00 00 00 | Li..i... | Firmware version, Ah available |
 |     |                         |          | [00:01] "4C 69" product code, always seen that value |
 |     |                         |          | [02:03] "01 17" v1.17 firmware version |
-|     |                         |          | ? [04:05] "69 00" (Ah) 105Ah capacity available |
-|     |                         |          | [06:07] ??? |
-| 360 | 00 00 00 00 00 00 00 00 | ........ | ??? always found to be null |
+|     |                         |          | [04:05] "69 00" (Ah) 105Ah capacity available |
+|     |                         |          | [06:07] *???* always found to be null |
+| 360 | 00 00 00 00 00 00 00 00 | ........ | *???* always found to be null |
 | 361 |                         |          | *not seen* |
 | 362 |                         |          | *not seen* |
 | 363 |                         |          | *not seen* |
@@ -89,10 +89,10 @@ CAN protocol is set to 500kBit/s (no FD).
 | 370 |                         |          | *not seen* |
 | 371 |                         |          | *not seen* |
 | 372 | 02 00 00 00 00 00 00 00 | ........ | |
-|     |                         | ........ | ??? 2 batteries online, 0 batteries offline |
+|     |                         | ........ | 2 batteries online, 0 batteries offline |
 |     | 02 00                   | ........ | [00:01] "04 00" batteries online |
-|     |                         | ........ | [02:03] *???* |
-|     |                         | ........ | [04:05] *???* |
+|     |                         | ........ | [02:03] *???*, see below |
+|     |                         | ........ | [04:05] *???*, see below |
 |     |                   01 00 | ........ | [06:07] "01 00" batteries offline |
 |     |                         | ........ | BYD system sent these frames upon first power up: |
 |     | 02 00 02 00 01 00 00 00 | ........ | Frame 01 |
@@ -102,15 +102,16 @@ CAN protocol is set to 500kBit/s (no FD).
 |     |                         |          | [02:03] "01 0D" (mV) 3.329V Highest Cell Voltage, see 375 |
 |     |                         |          | [04:05] "1F 01" (K +1K) 15°C Minimum Cell Temperature, see 376 |
 |     |                         |          | [06:07] "22 01" (K +1K) 18°C Maximum Cell Temperature, see 377 |
-| 374 | 32 00 00 00 00 00 00 00 | 2....... | Cell name with "Lowest Cell Voltage", see 373 |
-| 375 | 32 00 00 00 00 00 00 00 | 2....... | Cell name with "Highest Cell Voltage", see 373 |
-| 376 | 32 00 00 00 00 00 00 00 | 2....... | Cell name with "Minimum Cell Temperature", see 373 |
-| 377 | 31 00 00 00 00 00 00 00 | 1....... | Cell name with "Maximum Cell Temperature", see 373 |
+| 374 | 32 00 00 00 00 00 00 00 | 2....... | Cell name (string) with "Lowest Cell Voltage", see 373 |
+| 375 | 32 00 00 00 00 00 00 00 | 2....... | Cell name (string) with "Highest Cell Voltage", see 373 |
+| 376 | 32 00 00 00 00 00 00 00 | 2....... | Cell name (string) with "Minimum Cell Temperature", see 373 |
+| 377 | 31 00 00 00 00 00 00 00 | 1....... | Cell name (string) with "Maximum Cell Temperature", see 373 |
 | 378 | 40 08 00 00 2B 07 00 00 | @...+... | History Charged / Discharged Energy |
 |     |                         |          | [00:03] "40 08 00 00" (kWh/10) 211.2kWh Charged Energy |
 |     |                         |          | [04:07] "2B 07 00 00" (kWh/10) 183.5kWh Discharged Energy |
 | 379 | 9C 00 00 00 00 00 00 00 | ........ | Installed Ah |
 |     |                         |          | [00:01] "9C 00" (Ah) 156Ah |
+|     |                         |          | [02:07] *???* always found to be null |
 | 37A |                         |          | *not seen* |
 | 37B |                         |          | *not seen* |
 | 37C |                         |          | *not seen* |
