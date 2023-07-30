@@ -122,8 +122,8 @@ Things to note:
 | 372 | 02 00 00 00 00 00 00 00 | ........ | |
 |     |                         | ........ | 2 batteries online, 0 batteries offline |
 |     | 02 00                   | ........ | [00:01] "02 00" batteries online |
-|     |                         | ........ | [02:03] *???*, see below |
-|     |                         | ........ | [04:05] *???*, see below |
+|     |                         | ........ | [02:03] *???*, seems to be ignored by Venus OS, see below |
+|     |                         | ........ | [04:05] *???*, seems to be ignored by Venus OS, see below |
 |     |                   01 00 | ........ | [06:07] "01 00" batteries offline |
 |     |                         | ........ | BYD system sent these frames upon first power up: |
 |     | 02 00 02 00 01 00 00 00 | ........ | Frame 01 |
