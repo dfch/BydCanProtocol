@@ -38,15 +38,35 @@ CAN protocol is set to 500kBit/s (no FD).
 | 357 |                         |          | *not seen* |
 | 358 |                         |          | *not seen* |
 | 359 |                         |          | *not seen* |
-| 35A | AA AA AA AA AA AA AA AA | ........ | ? recurring pattern, seems to be "start of transmission" or alarms, see SMA below|
-| 35B | 00 00 00 00 00 00 00 00 | ........ | ? always found to be null, could be events, see SMA below |
+| 35A | AA AA AA AA AA AA AA AA | ........ | Alarms and Warnings, 'AA' means OK, see SMA below |
+|     | 10                      | ........ | [00] Low battery voltage: Alarm |
+|     |             10          | ........ | [04] Low battery voltage: Warning |
+|     | 04                      | ........ | [00] High battery voltage : Alarm |
+|     |             04          | ........ | [04] High battery voltage : Warning |
+|     |       01                | ........ | [02] High charge current: Alarm |
+|     |                   01    | ........ | [06] High charge current: Warning |
+|     |    40                   | ........ | [01] High discharge current: Alarm |
+|     |                40       | ........ | [05] High discharge current: Warning |
+|     |    01                   | ........ | [01] Low temperature: Alarm |
+|     |                01       | ........ | [05] Low temperature: Warning |
+|     | 40                      | ........ | [00] High temperature: Alarm |
+|     |             40          | ........ | [04] High temperature: Warning |
+|     |    10                   | ........ | [01] Low charge temperature: Alarm |
+|     |                10       | ........ | [05] Low charge temperature: Warning |
+|     |    04                   | ........ | [01] High charge temperature: Alarm |
+|     |                04       | ........ | [05] High charge temperature: Warning |
+|     |       40                | ........ | [02] Internal failure: Alarm |
+|     |                   40    | ........ | [06] Internal failure: Warning |
+|     |          01             | ........ | [03] Cell imbalance: Alarm |
+|     |                      01 | ........ | [07] Cell imbalance: Warning |
+| 35B | 00 00 00 00 00 00 00 00 | ........ | ? always found to be null, see SMA below |
 | 35C |                         |          | *not seen* |
 | 35D |                         |          | *not seen* |
 | 35E | 42 59 44 00 00 00 00 00 | BYD..... | Manufacturer |
 |     |                         |          | [00:02] "BYD" (string) "BYD" manufacturer identification
 |     |                         |          | [04:07] always found to be null
 | 35F | 4C 69 01 17 69 00 00 00 | Li..i... | Firmware version, Ah available |
-|     |                         |          | [00:01] "4C 69" ??? product code, always seen that value   |
+|     |                         |          | [00:01] "4C 69" ??? product code, always seen that value |
 |     |                         |          | [02:03] "01 17" v1.17 firmware version |
 |     |                         |          | ? [04:05] "69 00" (Ah) 105Ah capacity available |
 |     |                         |          | [06:07] ??? |
