@@ -134,10 +134,10 @@ Things to note:
 |     |                         |          | [02:03] "01 0D" (mV) 3.329V Highest Cell Voltage, see 375 |
 |     |                         |          | [04:05] "1F 01" (K +1K) 15°C Minimum Cell Temperature, see 376 |
 |     |                         |          | [06:07] "22 01" (K +1K) 18°C Maximum Cell Temperature, see 377 |
-| 374 | 32 00 00 00 00 00 00 00 | 2....... | Cell name (string) with "Lowest Cell Voltage", see 373 |
-| 375 | 32 00 00 00 00 00 00 00 | 2....... | Cell name (string) with "Highest Cell Voltage", see 373 |
-| 376 | 32 00 00 00 00 00 00 00 | 2....... | Cell name (string) with "Minimum Cell Temperature", see 373 |
-| 377 | 31 00 00 00 00 00 00 00 | 1....... | Cell name (string) with "Maximum Cell Temperature", see 373 |
+| 374 | 32 00 00 00 00 00 00 00 | 2....... | Battery/Cell name (string) with "Lowest Cell Voltage", see 373 |
+| 375 | 32 00 00 00 00 00 00 00 | 2....... | Battery/Cell name (string) with "Highest Cell Voltage", see 373 |
+| 376 | 32 00 00 00 00 00 00 00 | 2....... | Battery/Cell name (string) with "Minimum Cell Temperature", see 373 |
+| 377 | 31 00 00 00 00 00 00 00 | 1....... | Battery/Cell name (string) with "Maximum Cell Temperature", see 373 |
 | 378 | 40 08 00 00 2B 07 00 00 | @...+... | History Charged / Discharged Energy |
 |     |                         |          | [00:03] "40 08 00 00" (kWh/10) 211.2kWh Charged Energy |
 |     |                         |          | [04:07] "2B 07 00 00" (kWh/10) 183.5kWh Discharged Energy |
