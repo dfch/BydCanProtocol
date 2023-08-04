@@ -139,8 +139,8 @@ Things to note:
 | 376 | 32 00 00 00 00 00 00 00 | 2....... | Battery/Cell name (string) with "Minimum Cell Temperature", see 373 |
 | 377 | 31 00 00 00 00 00 00 00 | 1....... | Battery/Cell name (string) with "Maximum Cell Temperature", see 373 |
 | 378 | 40 08 00 00 2B 07 00 00 | @...+... | History Charged / Discharged Energy |
-|     |                         |          | [00:03] "40 08 00 00" (kWh/10) 211.2kWh Charged Energy |
-|     |                         |          | [04:07] "2B 07 00 00" (kWh/10) 183.5kWh Discharged Energy |
+|     |                         |          | [00:03] "40 08 00 00" (kWh/10, HectoWattHour) 211.2kWh Charged Energy |
+|     |                         |          | [04:07] "2B 07 00 00" (kWh/10, HectoWattHour) 183.5kWh Discharged Energy |
 | 379 | 9C 00 00 00 00 00 00 00 | ........ | Installed Ah |
 |     |                         |          | [00:01] "9C 00" (Ah) 156Ah |
 |     |                         |          | [02:07] *???* always found to be null |
