@@ -50,10 +50,10 @@ Things to note:
 | --- | ----------------------- | -------- | --- |
 | 350 |                         |          | *not seen* |
 | 351 | 48 02 00 05 00 05 AE 01 | H....... | Dvcc: CVL, CCL, DCL, DVL |
-|     |                         |          | [00:01] "48 02" (mV/10, CentiVolt) 58.4V CVL |
+|     |                         |          | [00:01] "48 02" (V*10, DeciVolt) 58.4V CVL |
 |     |                         |          | [02:03] "00 05" (A/10, DeciAmp) 128.0A CCL |
 |     |                         |          | [04:05] "00 05" (A/10, DeciAmp) 128.0A DCL |
-|     |                         |          | [06:07] "AE 01" (mV/10, CentiVolt) 43.0V DVL |
+|     |                         |          | [06:07] "AE 01" (V*10, DeciVolt) 43.0V DVL |
 | 352 |                         |          | *not seen* |
 | 353 |                         |          | *not seen* |
 | 354 |                         |          | *not seen* |
@@ -63,7 +63,7 @@ Things to note:
 |     |                         |          | [04:05] always null, *???* |
 |     |                         |          | [06:07] always null, *???* |
 | 356 | BE 14 F9 FF 8C 00 00 00 | ........ | BatteryStats: Voltage, Amps, Temperature |
-|     |                         |          | [00:01] "BE 14" (mV/10, CentiVolt) 53.1V current voltage |
+|     |                         |          | [00:01] "BE 14" (mV, MilliVolt) 53.1V current voltage |
 |     |                         |          | [02:03] "F9 FF" (A/10, DeciAmp, signed) -0.7A consumed Amps; "-" discharge / "+" charge |
 |     |                         |          | [04:05] "8C 00" (°C/10, Deci, signed) 14.0°C battery temperature |
 |     |                         |          | [06:07] always found to be null, *???* definitely not Watts |
