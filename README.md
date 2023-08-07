@@ -34,7 +34,7 @@ Things to note:
 * If frames are not sent frequently enough, Venus OS interprets the sender as being disconnected (offering to *remove* the device).
 * "Redetect battery" in Venus OS seems to send some frames to the "battery". It seems to be sufficient to just keep on sending the above frames (no other sequence needed).
 * All information has been dumped on a Raspberry 4 with Venus OS v3.00 (as written above) and a RS485 CAN HAT with `candump`.
-* Emulation of the battery has beend done from an Espressif ESP32 (and S2, S3) with a TJA1051 transceiver.
+* Emulation of the battery has been done from an Espressif ESP32 (and S2, S3) with a TJA1050/1 transceiver.
 * (not really BYD related) Extended frames (with 29bit identifiier) seem to get ignored by Venus OS. So, in theory, it would be possible to connect a Venus OS to different CAN devices / batteries and have a single device aggregate the messages from each battery into a BYD message and send that to Venus OS.
 
 ## Victron Communication / Identifiers
