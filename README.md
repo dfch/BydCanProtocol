@@ -8,23 +8,23 @@ CAN protocol is set to 500kBit/s (no FD). All frames are sent with 8 bytes lengt
 
 When emulating a BYD battery it seems to be sufficient to just periodically send the following frames with a `1000ms` delay:
 
-1. 0x35E
-2. 0x382
-3. 0x35F
-4. 0x35A
-5. 0x35B
-6. 0x351
-7. 0x355
-8. 0x356
-9. 0x360
-10. 0x372
-11. 0x373
-12. 0x374
-13. 0x375
-14. 0x376
-15. 0x377
-16. 0x378
-17. 0x379
+1. 0x35E, ManufacturerInfo
+2. 0x382, ProductInfo
+3. 0x35F, ProductCapacity
+4. 0x35A, AlarmsWarnings
+5. 0x35B, EventsUnused
+6. 0x351, Dvcc
+7. 0x355, StateInfo
+8. 0x356, BatteryStats
+9. 0x360, Unknown0
+10. 0x372, BankInfo
+11. 0x373, CellInfo
+12. 0x374, CellVoltMinId
+13. 0x375, CellVoltMaxId
+14. 0x376, CellTempMinId
+15. 0x377, CellTempMaxId
+16. 0x378, History
+17. 0x379, BatterySize
 
 Things to note:
 
@@ -66,7 +66,7 @@ Things to note:
 |     |                         |          | [00:01] "BE 14" (mV, MilliVolt) 53.1V current voltage |
 |     |                         |          | [02:03] "F9 FF" (A/10, DeciAmp, signed) -0.7A consumed Amps; "-" discharge / "+" charge |
 |     |                         |          | [04:05] "8C 00" (°C/10, Deci, signed) 14.0°C battery temperature |
-|     |                         |          | [06:07] always found to be null, *???* definitely not Watts |
+|     |                         |          | [06:07] always found to be null, definitely not Watts |
 | 357 |                         |          | *not seen* |
 | 358 |                         |          | *not seen* |
 | 359 |                         |          | *not seen* |
@@ -172,14 +172,7 @@ Things to note:
 ### What is missing?
 
 * Nr of modules blocking charge/discharge (not clear if supported)
-* Alarms
-* Events
-* Consumed Watts
  
-### Unclear
-
-* Product ID (maybe 0x35F [00:01])
-
 ### How it looks like in Venus OS
 
 ![image](https://github.com/dfch/BydCanProtocol/assets/8310360/fd1df1f5-c802-41c7-9ff3-1f68f695cdf0)
