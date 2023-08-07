@@ -132,8 +132,8 @@ Things to note:
 | 373 | EA 0C 01 0D 1F 01 22 01 | ......". | CellInfo: Cell Voltage and Temperature |
 |     |                         |          | [00:01] "EA 0C" (mV) 3.306V Lowest Cell Voltage, see 374 |
 |     |                         |          | [02:03] "01 0D" (mV) 3.329V Highest Cell Voltage, see 375 |
-|     |                         |          | [04:05] "1F 01" (K +1K) 15°C Minimum Cell Temperature, see 376 |
-|     |                         |          | [06:07] "22 01" (K +1K) 18°C Maximum Cell Temperature, see 377 |
+|     |                         |          | [04:05] "1F 01" (K) 287K, 14°C Minimum Cell Temperature, see 376 |
+|     |                         |          | [06:07] "22 01" (K) 290K/17°C Maximum Cell Temperature, see 377 |
 | 374 | 32 00 00 00 00 00 00 00 | 2....... | Battery/Cell name (string) with "Lowest Cell Voltage", see 373 |
 | 375 | 32 00 00 00 00 00 00 00 | 2....... | Battery/Cell name (string) with "Highest Cell Voltage", see 373 |
 | 376 | 32 00 00 00 00 00 00 00 | 2....... | Battery/Cell name (string) with "Minimum Cell Temperature", see 373 |
