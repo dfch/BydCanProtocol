@@ -6,7 +6,7 @@ The following information has been discovered between a BYD Battery-Box Premium 
 
 CAN protocol is set to 500kBit/s (no FD). All frames are sent with 8 bytes length (zero padded).
 
-When emulating a BYD battery it seems to be sufficient to just periodically send the following frames with a `1000ms` delay:
+When emulating a BYD battery it seems to be sufficient to just periodically send the following frames with a `900ms` delay:
 
 1. 0x35E, ManufacturerInfo
 2. 0x382, ProductInfo
