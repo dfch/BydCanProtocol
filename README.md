@@ -1,6 +1,6 @@
 # BYD Battery-Box Premium LVS CAN Protocol
 
-A "reverse engineering" of the BYD Battery-Box Premium LVS CAN protocol when used with Victron/Venus OS.
+A "reverse engineering" of the BYD Battery-Box Premium LVS CAN protocol when used with Victron/Venus OS. See the source code for a full working implementation.
 
 The following information has been discovered between a BYD Battery-Box Premium LVS B019 / v1.23 and a Victron Venus OS v3.00. Battery-Box consist of 2 batteries in 1 tower (48V, 2* 78Ah).
 
