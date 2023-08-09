@@ -18,5 +18,9 @@ namespace Byd
         int16_t CurrentDeciAmpere;
         /// @brief Represents the battery temperature in deci Celsius.
         int16_t TemperatureDeciCelsius;
+        /// @brief Unused.
+        uint16_t Reserved0;
     } BatteryStats;
+
+    static_assert(DataLength == sizeof(BatteryStats), "sizeof(BatteryStats) must be equal to DataLength.");
 }

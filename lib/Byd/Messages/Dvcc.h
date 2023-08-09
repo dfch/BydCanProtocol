@@ -21,4 +21,6 @@ namespace Byd
         /// @brief Represents the discharge voltage limit in deci Volts (DVL).
         uint16_t DischargeVoltageLimitDeciVolt;
     } Dvcc;
+
+    static_assert(DataLength == sizeof(Dvcc), "sizeof(Dvcc) must be equal to DataLength.");
 }

@@ -17,4 +17,6 @@ namespace Byd
         /// @brief Represents the product name.
         char Name[DataLength];
     } ProductInfo;
+
+    static_assert(DataLength == sizeof(ProductInfo), "sizeof(ProductInfo) must be equal to DataLength.");
 }

@@ -21,4 +21,6 @@ namespace Byd
         /// @brief Represents the maximum cell temperature in Kelvin.
         uint16_t CellTemperatureMaximumKelvin;
     } CellInfo;
+
+    static_assert(DataLength == sizeof(CellInfo), "sizeof(CellInfo) must be equal to DataLength.");
 }

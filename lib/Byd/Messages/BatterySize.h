@@ -19,4 +19,6 @@ namespace Byd
         /// @brief Unused.
         uint32_t Reserved1;
     } BatterySize;
+
+    static_assert(DataLength == sizeof(BatterySize), "sizeof(BatterySize) must be equal to DataLength.");
 }

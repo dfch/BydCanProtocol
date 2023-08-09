@@ -17,4 +17,6 @@ namespace Byd
         /// @brief Represents the total amount of discharged energy in hecto Watt hours.
         uint32_t DischargedEnergyHectoWattHour;
     } History;
+
+    static_assert(DataLength == sizeof(History), "sizeof(History) must be equal to DataLength.");
 }

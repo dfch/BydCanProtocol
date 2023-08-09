@@ -17,4 +17,6 @@ namespace Byd
         /// @brief Represents the manufacturer name.
         char Name[DataLength];
     } ManufacturerInfo;
+
+    static_assert(DataLength == sizeof(ManufacturerInfo), "sizeof(ManufacturerInfo) must be equal to DataLength.");
 }

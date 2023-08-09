@@ -103,4 +103,6 @@ namespace Byd
         char CharArray[DataLength];
         std::byte ByteArray[DataLength];
     } Raw;
+
+    static_assert(DataLength == sizeof(Raw), "sizeof(Raw) must be equal to DataLength.");
 }

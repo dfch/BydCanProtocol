@@ -20,4 +20,6 @@ namespace Byd
         uint16_t SizeAvailableAmpereHour;
         uint16_t Reserved0;
     } BatteryInfo;
+
+    static_assert(DataLength == sizeof(BatteryInfo), "DataLength must be equal to sizeof(BatteryInfo).");
 }

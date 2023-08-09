@@ -17,4 +17,6 @@ namespace Byd
         /// @brief The name of the cell.
         char Name[DataLength];
     } CellId;
+
+    static_assert(DataLength == sizeof(CellId), "sizeof(CellId) must be equal to DataLength."); 
 }

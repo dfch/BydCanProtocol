@@ -21,4 +21,6 @@ namespace Byd
         /// @brief Represents the number of batteries which are blocked for discharging.
         uint16_t ChargingBlocked;       ///< Not supported, always 0.
     } BankInfo;
+
+    static_assert(DataLength == sizeof(BankInfo), "sizeof(BankInfo) must be equal to DataLength");
 }

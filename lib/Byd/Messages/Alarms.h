@@ -18,4 +18,6 @@ namespace Byd
         /// @brief Represents the warning flags.
         std::bitset<32> Warning;
     } Alarms;
+
+    static_assert(DataLength == sizeof(Alarms), "sizeof(Alarms) must be equal to DataLength.");
 }

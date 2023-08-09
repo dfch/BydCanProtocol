@@ -19,4 +19,6 @@ namespace Byd
         /// @brief Unused.
         uint32_t Reserved0;
     } StateInfo;
+
+    static_assert(DataLength == sizeof(StateInfo), "sizeof(StateInfo) must be equal to DateLength.");
 }
