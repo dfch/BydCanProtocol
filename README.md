@@ -10,7 +10,7 @@ When emulating a BYD battery it seems to be sufficient to just periodically send
 
 1. 0x35E, ManufacturerInfo
 2. 0x382, ProductInfo
-3. 0x35F, ProductCapacity
+3. 0x35F, BatteryInfo
 4. 0x35A, AlarmsWarnings
 5. 0x35B, EventsUnused
 6. 0x351, Dvcc
@@ -97,7 +97,7 @@ Things to note:
 | 35E | 42 59 44 00 00 00 00 00 | BYD..... | Manufacturer |
 |     |                         |          | [00:02] "BYD" (string) "BYD" manufacturer identification
 |     |                         |          | [04:07] always found to be null
-| 35F | 4C 69 01 17 69 00 00 00 | Li..i... | Firmware version, Ah available |
+| 35F | 4C 69 01 17 69 00 00 00 | Li..i... | BatteryInfo: Product/Firmware version, Ah available |
 |     |                         |          | [00:01] "4C 69" product code, always seen that value |
 |     |                         |          | [02:03] "01 17" v1.17 firmware version |
 |     |                         |          | [04:05] "69 00" (Ah) 105Ah capacity available |
