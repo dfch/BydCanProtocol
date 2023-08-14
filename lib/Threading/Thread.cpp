@@ -3,23 +3,34 @@
 * See LICENSE file in the project root for full license information.
 */
 
-#if defined(ESP_PLATFORM)
+#include <ctime>
+#include <unistd.h>
+#include <pthread.h>
 
 #include "Thread.h"
-
+#include <Contract.h>
+    
 namespace Threading
 {
     void Thread::Sleep(uint32_t waitTimeMilliseconds)
     {
-        vTaskDelay(waitTimeMilliseconds / portTICK_PERIOD_MS);
+        usleep(waitTimeMilliseconds * 1000);
     }
 
-    void Thread::Start(TaskFunction_t func, const char* name, void* pvParameters)
+    void Thread::Start(void *(*start_routine)(void *arg), void *arg)
     {
-        TaskHandle_t handle = NULL;
+        Start(start_routine, arg, stackSizeInBytesDefault);
+    }
 
-        xTaskCreate(func, name, stackSizeInWordsDefault, pvParameters, priorityDefault, &handle);
+    void Thread::Start(void *(*start_routine)(void *arg), void *arg, int32_t stackSize)
+    {
+        pthread_t threadId;
+        pthread_attr_t attributes;
+        pthread_attr_init(&attributes);
+        attributes.stacksize = stackSize;
+        attributes.detachstate = PTHREAD_CREATE_DETACHED;
+        
+        auto result = pthread_create(&threadId, &attributes, start_routine, arg);
+        Contract::Requires([result] { return 0 == result; }, NAMEOF(result));
     }
 }
-
-#endif

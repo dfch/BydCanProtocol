@@ -8,9 +8,8 @@
 #pragma once
 
 #include <cstdint>
-
-#include "freertos/FreeRTOS.h"
-#include "freertos/task.h"
+#include <unistd.h>
+#include <pthread.h>
 
 namespace Threading
 {
@@ -19,7 +18,7 @@ namespace Threading
     {
         private:
             /// @brief Represents the default stack size in words.
-            static const uint32_t stackSizeInWordsDefault = 2048;
+            static const uint32_t stackSizeInBytesDefault = 4096;
 
             /// @brief Represents the default thread priority.
             static const int priorityDefault = 5;
@@ -33,11 +32,16 @@ namespace Threading
             static void Sleep(uint32_t waitTimeMilliseconds);
 
             /// @brief Creates a new task.
-            /// @param task The task function.
-            /// @param name The name of the task.
-            /// @param pvParameters The parameters to pass to the task.
-            static void Start(TaskFunction_t task, const char* name, void* pvParameters);
-            
+            /// @param taskFunction The task function.
+            /// @param arg The parameters to pass to the task.
+            static void Start(void *(*taskFunction)(void *arg), void *arg);
+
+            /// @brief Creates a new task.
+            /// @param taskFunction The task function.
+            /// @param arg The parameters to pass to the task.
+            /// @param stackSize The size of the stack in bytes.
+            static void Start(void *(*taskFunction)(void *arg), void *arg, int32_t stackSize);
+
     };
 }
 
