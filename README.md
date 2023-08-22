@@ -8,10 +8,10 @@ CAN protocol is set to 500kBit/s (no FD). All frames are sent with 8 bytes lengt
 
 When emulating a BYD battery it seems to be sufficient to just periodically send the following frames with a `900ms` and `1000ms` delay:
 
-1. 0x35E, ManufacturerInfo
-2. 0x382, ProductInfo
-3. 0x35F, BatteryInfo
-4. 0x35A, AlarmsWarnings
+1. 0x35E, [ManufacturerInfo](../main/lib/Byd/Messages/ManufacturerInfo.h)
+2. 0x382, [ProductInfo](../main/lib/Byd/Messages/ProductInfo.h)
+3. 0x35F, [BatteryInfo](../main/lib/Byd/Messages/BatteryInfo.h)
+4. 0x35A, [AlarmsWarnings](../main/lib/Byd/Messages/Alarms.h)
 5. 0x35B, EventsUnused
 6. 0x351, [Dvcc](../main/lib/Byd/Messages/Dvcc.h)
 7. 0x355, StateInfo
@@ -70,7 +70,7 @@ Things to note:
 | 357 |                         |          | *not seen* |
 | 358 |                         |          | *not seen* |
 | 359 |                         |          | *not seen* |
-| 35A | AA AA AA AA AA AA AA AA | ........ | Alarms and Warnings, bit field, 'AA' means OK |
+| 35A | AA AA AA AA AA AA AA AA | ........ | [Alarms and Warnings](../main/lib/Byd/Messages/Alarms.h), bit field, 'AA' means OK |
 |     | 10 .. .. .. .. .. .. .. | ........ | [00] "10" Low battery voltage: Alarm |
 |     | .. .. .. .. 10 .. .. .. | ........ | [04] "10" Low battery voltage: Warning |
 |     | 04 .. .. .. .. .. .. .. | ........ | [00] "04" High battery voltage : Alarm |
@@ -94,10 +94,10 @@ Things to note:
 | 35B | 00 00 00 00 00 00 00 00 | ........ | *???* always found to be null, aka Events |
 | 35C |                         |          | *not seen* |
 | 35D |                         |          | *not seen* |
-| 35E | 42 59 44 00 00 00 00 00 | BYD..... | Manufacturer |
+| 35E | 42 59 44 00 00 00 00 00 | BYD..... | [ManufacturerInfo](../main/lib/Byd/Messages/ManufacturerInfo.h) |
 |     |                         |          | [00:02] "BYD" (string) "BYD" manufacturer identification
 |     |                         |          | [04:07] always found to be null
-| 35F | 4C 69 01 17 69 00 00 00 | Li..i... | BatteryInfo: Product/Firmware version, Ah available |
+| 35F | 4C 69 01 17 69 00 00 00 | Li..i... | [BatteryInfo](../main/lib/Byd/Messages/BatteryInfo.h): Product/Firmware version, Ah available |
 |     |                         |          | [00:01] "4C 69" product code, always seen that value |
 |     |                         |          | [02:03] "01 17" v1.17 firmware version |
 |     |                         |          | [04:05] "69 00" (Ah) 105Ah capacity available |
@@ -152,7 +152,7 @@ Things to note:
 | 37F |                         |          | *not seen* |
 | 380 |                         |          | *not seen* |
 | 381 |                         |          | *not seen* |
-| 382 | 50 52 45 4D 49 55 4D 00 | PREMIUM. | Product identification |
+| 382 | 50 52 45 4D 49 55 4D 00 | PREMIUM. | [Product identification](../main/lib/Byd/Messages/ProductInfo.h) |
 |     |                         |          | [00:06] "PREMIUM" (string) product identification |
 |     |                         |          | [07] always found to be null
 | 383 |                         |          | *not seen* |
