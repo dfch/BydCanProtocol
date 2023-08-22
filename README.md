@@ -14,17 +14,17 @@ When emulating a BYD battery it seems to be sufficient to just periodically send
 4. 0x35A, [AlarmsWarnings](../main/lib/Byd/Messages/Alarms.h)
 5. 0x35B, EventsUnused
 6. 0x351, [Dvcc](../main/lib/Byd/Messages/Dvcc.h)
-7. 0x355, StateInfo
-8. 0x356, BatteryStats
+7. 0x355, [StateInfo](../main/lib/Byd/Messages/StateInfo.h)
+8. 0x356, [BatteryStats](../main/lib/Byd/Messages/BatteryStats.h)
 9. 0x360, Unknown0
-10. 0x372, BankInfo
-11. 0x373, CellInfo
-12. 0x374, CellVoltMinId
-13. 0x375, CellVoltMaxId
-14. 0x376, CellTempMinId
-15. 0x377, CellTempMaxId
-16. 0x378, History
-17. 0x379, BatterySize
+10. 0x372, [BankInfo](../main/lib/Byd/Messages/BankInfo.h)
+11. 0x373, [CellInfo](../main/lib/Byd/Messages/CellInfo.h)
+12. 0x374, [CellVoltMinId](../main/lib/Byd/Messages/CellId.h)
+13. 0x375, [CellVoltMaxId](../main/lib/Byd/Messages/CellId.h)
+14. 0x376, [CellTempMinId](../main/lib/Byd/Messages/CellId.h)
+15. 0x377, [CellTempMaxId](../main/lib/Byd/Messages/CellId.h)
+16. 0x378, [History](../main/lib/Byd/Messages/History.h)
+17. 0x379, [BatterySize](../main/lib/Byd/Messages/BatterySize.h)
 
 Things to note:
 
@@ -57,12 +57,12 @@ Things to note:
 | 352 |                         |          | *not seen* |
 | 353 |                         |          | *not seen* |
 | 354 |                         |          | *not seen* |
-| 355 | 43 00 64 00 00 00 00 00 | C.d..... | StateInfo: State of Charge, State of Health |
+| 355 | 43 00 64 00 00 00 00 00 | C.d..... | [StateInfo](../main/lib/Byd/Messages/StateInfo.h): State of Charge, State of Health |
 |     |                         |          | [00:01] "43 00" (%) 67% SoC |
 |     |                         |          | [02:03] "64 00" (%) 100% SoH |
 |     |                         |          | [04:05] always null, *???* |
 |     |                         |          | [06:07] always null, *???* |
-| 356 | BE 14 F9 FF 8C 00 00 00 | ........ | BatteryStats: Voltage, Amps, Temperature |
+| 356 | BE 14 F9 FF 8C 00 00 00 | ........ | [BatteryStats](../main/lib/Byd/Messages/BatteryStats.h): Voltage, Amps, Temperature |
 |     |                         |          | [00:01] "BE 14" (mV, MilliVolt) 53.1V current voltage |
 |     |                         |          | [02:03] "F9 FF" (A/10, DeciAmp, signed) -0.7A consumed Amps; "-" discharge / "+" charge |
 |     |                         |          | [04:05] "8C 00" (°C/10, Deci, signed) 14.0°C battery temperature |
@@ -120,7 +120,7 @@ Things to note:
 | 36F |                         |          | *not seen* |
 | 370 |                         |          | *not seen* |
 | 371 |                         |          | *not seen* |
-| 372 | 02 00 00 00 00 00 00 00 | ........ | BankInfo |
+| 372 | 02 00 00 00 00 00 00 00 | ........ | [BankInfo](../main/lib/Byd/Messages/BankInfo.h) |
 |     |                         | ........ | 2 batteries online, 0 batteries offline |
 |     | 02 00 .. .. .. .. .. .. | ........ | [00:01] "02 00" batteries online |
 |     |                         | ........ | [02:03] "00 00" *???*, seems to be ignored by Venus OS, see below |
@@ -129,19 +129,19 @@ Things to note:
 |     |                         | ........ | BYD system sent these frames upon first power up: |
 |     | 02 00 02 00 01 00 00 00 | ........ | Frame 01 |
 |     | 02 00 00 00 00 00 00 00 | ........ | Frame 02 + consecutive frames |
-| 373 | EA 0C 01 0D 1F 01 22 01 | ......". | CellInfo: Cell Voltage and Temperature |
+| 373 | EA 0C 01 0D 1F 01 22 01 | ......". | [CellInfo](../main/lib/Byd/Messages/CellInfo.h): Cell Voltage and Temperature |
 |     |                         |          | [00:01] "EA 0C" (mV) 3.306V Lowest Cell Voltage, see 374 |
 |     |                         |          | [02:03] "01 0D" (mV) 3.329V Highest Cell Voltage, see 375 |
 |     |                         |          | [04:05] "1F 01" (K) 287K, 14°C Minimum Cell Temperature, see 376 |
 |     |                         |          | [06:07] "22 01" (K) 290K/17°C Maximum Cell Temperature, see 377 |
-| 374 | 32 00 00 00 00 00 00 00 | 2....... | Battery/Cell name (string) with "Lowest Cell Voltage", see 373 |
-| 375 | 32 00 00 00 00 00 00 00 | 2....... | Battery/Cell name (string) with "Highest Cell Voltage", see 373 |
-| 376 | 32 00 00 00 00 00 00 00 | 2....... | Battery/Cell name (string) with "Minimum Cell Temperature", see 373 |
-| 377 | 31 00 00 00 00 00 00 00 | 1....... | Battery/Cell name (string) with "Maximum Cell Temperature", see 373 |
-| 378 | 40 08 00 00 2B 07 00 00 | @...+... | History: Charged / Discharged Energy |
+| 374 | 32 00 00 00 00 00 00 00 | 2....... | [Battery/Cell name](../main/lib/Byd/Messages/CellId.h) (string) with "Lowest Cell Voltage", see 373 |
+| 375 | 32 00 00 00 00 00 00 00 | 2....... | [Battery/Cell name](../main/lib/Byd/Messages/CellId.h) (string) with "Highest Cell Voltage", see 373 |
+| 376 | 32 00 00 00 00 00 00 00 | 2....... | [Battery/Cell name](../main/lib/Byd/Messages/CellId.h) (string) with "Minimum Cell Temperature", see 373 |
+| 377 | 31 00 00 00 00 00 00 00 | 1....... | [Battery/Cell name](../main/lib/Byd/Messages/CellId.h) (string) with "Maximum Cell Temperature", see 373 |
+| 378 | 40 08 00 00 2B 07 00 00 | @...+... | [History](../main/lib/Byd/Messages/History.h): Charged / Discharged Energy |
 |     |                         |          | [00:03] "40 08 00 00" (kWh/10, HectoWattHour) 211.2kWh Charged Energy |
 |     |                         |          | [04:07] "2B 07 00 00" (kWh/10, HectoWattHour) 183.5kWh Discharged Energy |
-| 379 | 9C 00 00 00 00 00 00 00 | ........ | BatterySize: Installed Ah |
+| 379 | 9C 00 00 00 00 00 00 00 | ........ | [BatterySize](../main/lib/Byd/Messages/BatterySize.h): Installed Ah |
 |     |                         |          | [00:01] "9C 00" (Ah) 156Ah |
 |     |                         |          | [02:07] *???* always found to be null |
 | 37A |                         |          | *not seen* |
