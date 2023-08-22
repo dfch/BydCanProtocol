@@ -13,7 +13,7 @@ When emulating a BYD battery it seems to be sufficient to just periodically send
 3. 0x35F, BatteryInfo
 4. 0x35A, AlarmsWarnings
 5. 0x35B, EventsUnused
-6. 0x351, Dvcc
+6. 0x351, [Dvcc](../main/lib/Byd/Messages/Dvcc.h)
 7. 0x355, StateInfo
 8. 0x356, BatteryStats
 9. 0x360, Unknown0
