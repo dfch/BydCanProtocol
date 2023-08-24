@@ -27,9 +27,13 @@ namespace Threading
         pthread_t threadId;
         pthread_attr_t attributes;
         pthread_attr_init(&attributes);
+        // For whatever reason on env:native with at least MSYS2 G++ running on Windows
+        // `stacksize` and `detachstate` are not defined.
+        #if defined(ESP_PLATFORM)
         attributes.stacksize = stackSize;
         attributes.detachstate = PTHREAD_CREATE_DETACHED;
-        
+        #endif
+
         auto result = pthread_create(&threadId, &attributes, start_routine, arg);
         Contract::Requires([result] { return 0 == result; }, NAMEOF(result));
     }

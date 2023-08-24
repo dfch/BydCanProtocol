@@ -3,8 +3,6 @@
 * See LICENSE file in the project root for full license information.
 */
 
-#if defined(ESP_PLATFORM)
-
 #pragma once
 
 #include <cstdint>
@@ -18,7 +16,7 @@ namespace Threading
     {
         private:
             /// @brief Represents the default stack size in words.
-            static const uint32_t stackSizeInBytesDefault = 4096;
+            static constexpr uint32_t stackSizeInBytesDefault = 4096;
 
             /// @brief Represents the default thread priority.
             static const int priorityDefault = 5;
@@ -44,5 +42,3 @@ namespace Threading
 
     };
 }
-
-#endif
