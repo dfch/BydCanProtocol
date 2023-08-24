@@ -89,7 +89,7 @@ namespace Threading
             // @param func The function to execute.
             // @param timeout The number of milliseconds to wait, or Timeout::Infinite (-1) to wait indefinitely.
             // @return True if the current instance receives a signal and the function is executed; otherwise, false.
-            bool WaitAndRelease(std::function<void()> func, int32_t timeout = Timeout::Infinite);
+            bool WaitAndRelease(std::function<void()> func, int32_t timeout);
     };
 }
 
