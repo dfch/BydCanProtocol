@@ -616,10 +616,6 @@ extern "C"
             auto result = message->SerialiseData();
 
             // Assert
-            for(auto c : result.ByteArray)
-            {
-                printf("0x%02X ", (int) c & 0xFF);
-            }
             TEST_ASSERT_EQUAL_STRING(expected, result.CharArray);
             TEST_ASSERT_EQUAL_HEX8('P', result.Bytes.E0);
             TEST_ASSERT_EQUAL_HEX8('R', result.Bytes.E1);
