@@ -18,5 +18,6 @@ namespace Contract
         Default = 1, // Default value for error codes.
         InvalidArgument = Default, // Error code used when encountering invalid arguments.
         NullArgument, // Error code when encountering null arguments.
+        OutOfRange, // Error code when encountering out of range arguments.
     };
 }
