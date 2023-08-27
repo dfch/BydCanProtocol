@@ -9,7 +9,7 @@
 
 #include <memory>
 
-#include <Pin.h>
+#include <../Gpio/Pin.h>
 #include <../CanTwai/Can.h>
 #include <../CanTwai/Configuration.h>
 #include <../MorseCode/Generator.h>
@@ -54,6 +54,9 @@ namespace Program
             /// @brief Default .ctor. Only to be used by the Factory.
             explicit Program();
 
+            /// @brief Needed by Factory for class instantiation.
+            friend std::unique_ptr<Program> std::make_unique<Program>();
+
         public:
             /// @brief Move .ctor.
             /// @param other Existing instance to move from. 
@@ -81,7 +84,7 @@ namespace Program
             public:
                 /// @brief Creates an instance of the Program class.
                 /// @return An instance to the Program class. 
-                static std::shared_ptr<Program> Create();
+                static std::unique_ptr<Program> Create();
 
         };
     };

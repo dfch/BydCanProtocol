@@ -7,9 +7,9 @@
 
 #include "Program.h"
 
-#include <Contract.h>
-#include <Thread.h>
-#include <Pin.h>
+#include <../Contract/Contract.h>
+#include <../Threading/Thread.h>
+#include <../Gpio/Pin.h>
 #include <../CanTwai/Can.h>
 #include <../CanTwai/Configuration.h>
 #include <../MorseCode/Generator.h>

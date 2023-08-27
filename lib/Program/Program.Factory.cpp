@@ -9,11 +9,11 @@
 
 namespace Program
 {
-    std::shared_ptr<Program> Program::Factory::Create()
+    std::unique_ptr<Program> Program::Factory::Create()
     {
-        Program instance;
-        
-        return std::make_shared<Program>(std::move(instance));
+        auto result = std::make_unique<Program>();
+
+        return result;
     }
 }
 
