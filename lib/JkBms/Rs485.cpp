@@ -56,10 +56,7 @@ namespace JkBms
 
         // Map data to body of frame.
         frame.Body = reinterpret_cast<const InformationUnit*>(data.data() + sizeof(Header));
-        
-        Identifier id(reinterpret_cast<Identifier>(frame.Body->Identifier));
-
-        // if(frame.Body->Identifier == Identifier::ReadAll) return ValidationResult::InvalidIdentifier;
+        if(!frame.Body->Identifier.IsValid()) return ValidationResult::InvalidIdentifier;
 
         // Map data to footer of frame.
         frame.Footer = reinterpret_cast<const Footer*>(data.data() + sizeof(Header) + bodySize);

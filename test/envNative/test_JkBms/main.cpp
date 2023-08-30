@@ -37,8 +37,13 @@ extern "C"
             RUN_TEST(IsValidWithValidLengthSucceeds);
             RUN_TEST(IsValidWithInvalidChecksumFails);
             RUN_TEST(IsValidWithValidChecksumSucceeds);
+            RUN_TEST(IsValidWithInvalidIdentifierFails);
 
             RUN_TEST(TestingCellVoltageSucceeds);
+            
+            RUN_TEST(ValdiatingNumberSucceeds);
+            RUN_TEST(ValdiatingIdentifierSucceeds);
+            RUN_TEST(ValdiatingIdentifierFails);
 
             return UNITY_END();
         }
