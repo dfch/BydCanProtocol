@@ -6,36 +6,68 @@
 #include "Rs485.h"
 
 #include <cstddef>
+#include <span>
 
 #include <Contract.h>
 
-using JkBms::Rs485;
+using namespace JkBms;
 
 namespace JkBms
 {
-    // Rs485::Rs485(std::vector<std::byte> data)
-    // {
-    //     this->data = data;
-    // }
-
-    Rs485::Rs485(std::vector<std::byte> &data)
+    Rs485::Rs485(std::vector<std::uint8_t> &data)
     {
         this->data = data;
     }
 
-    Rs485::Rs485(std::byte *data, size_t length)
+    Rs485::Rs485(std::uint8_t *data, size_t length)
     {
-        Contract::Requires([data] { return nullptr != data; });
+        Contract::Expects([data] { return nullptr != data; });
 
-        this->data = std::vector<std::byte>(data, data + length);
+        this->data = std::vector<std::uint8_t>(data, data + length);
     }
 
-    std::byte Rs485::operator[] (std::size_t index)
+    std::uint8_t Rs485::operator[] (std::size_t index)
     {
-        Contract::Requires([this, index] { return index < this->data.size(); }, Contract::ErrorCode::OutOfRange);
+        Contract::Expects([this, index] { return index < this->data.size(); }, Contract::ErrorCode::OutOfRange);
 
         auto result = this->data[index];
 
         return result;
+    }
+
+    ValidationResult Rs485::IsValid() const noexcept
+    {
+        Frame frame;
+
+        const auto frameSize = data.size();
+
+        // Check minimum frame size.
+        if(FrameSizeMinimum >= frameSize) return ValidationResult::FrameTooShort;
+
+        // Map data to header of frame.
+        frame.Header = reinterpret_cast<const Header*>(data.data());
+        if(!frame.Header->StartOfFrame.IsValid()) return ValidationResult::InvalidHeader;
+
+        // Check if length specified in header matches the frame size.
+        if(frame.Header->GetFrameLength() != frameSize) return ValidationResult::InvalidLength;
+        
+        // Calculate size of body.
+        const auto bodySize = frameSize - FrameSizeMinimum;
+
+        // Map data to body of frame.
+        frame.Body = reinterpret_cast<const InformationUnit*>(data.data() + sizeof(Header));
+        
+        Identifier id(reinterpret_cast<Identifier>(frame.Body->Identifier));
+
+        // if(frame.Body->Identifier == Identifier::ReadAll) return ValidationResult::InvalidIdentifier;
+
+        // Map data to footer of frame.
+        frame.Footer = reinterpret_cast<const Footer*>(data.data() + sizeof(Header) + bodySize);
+        if(!frame.Footer->EndCode.IsValid()) return ValidationResult::InvalidEndCode;
+
+        // Calculate checksum.
+        if(!frame.IsValidChecksum()) return ValidationResult::InvalidChecksum;
+
+        return ValidationResult::Success;
     }
 }
