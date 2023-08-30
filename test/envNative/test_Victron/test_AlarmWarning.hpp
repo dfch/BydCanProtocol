@@ -7,154 +7,132 @@
 
 #include <AlarmWarning.h>
 
-using Victron::AlarmWarning;
-
-extern "C"
+namespace test::envNative::test_Victron
 {
-    namespace test::envNative::test_Victron
+    using Victron::AlarmWarning;
+    
+    void ResetAllSucceeds()
     {
-        void ResetAllSucceeds()
-        {
-            // Arrange
-            AlarmWarning sut;
+        // Arrange
+        AlarmWarning sut;
 
-            // Act
-            sut.Reset();
+        // Act
+        sut.Reset();
 
-            // Assert
-            auto result = sut.Alarm.any() || sut.Warning.any();
-            TEST_ASSERT_FALSE(result);
-        }
+        // Assert
+        auto result = sut.Alarm.any() || sut.Warning.any();
+        TEST_ASSERT_FALSE(result);
+    }
 
-        void ResetAlarmsSucceeds()
-        {
-            // Arrange
-            AlarmWarning sut;
+    void ResetAlarmsSucceeds()
+    {
+        // Arrange
+        AlarmWarning sut;
 
-            // Act
-            sut.ResetAlarm();
+        // Act
+        sut.ResetAlarm();
 
-            // Assert
-            auto result = sut.Alarm.any();
-            TEST_ASSERT_FALSE(result);
-        }
+        // Assert
+        auto result = sut.Alarm.any();
+        TEST_ASSERT_FALSE(result);
+    }
 
-        void InitAlarmSucceeds()
-        {
-            // Arrange
-            // Act
-            AlarmWarning sut
-            { 
-                .Alarm = 1 << Victron::HighTemperatureAlarm
-            };
+    void InitAlarmSucceeds()
+    {
+        // Arrange
+        // Act
+        AlarmWarning sut
+        { 
+            .Alarm = 1 << Victron::HighTemperatureAlarm
+        };
 
-            // Assert
-            auto result = sut.Alarm.test(Victron::HighTemperatureAlarm);
-            TEST_ASSERT_TRUE_MESSAGE(result, sut.Alarm.to_string().c_str());
-        }
+        // Assert
+        auto result = sut.Alarm.test(Victron::HighTemperatureAlarm);
+        TEST_ASSERT_TRUE_MESSAGE(result, sut.Alarm.to_string().c_str());
+    }
 
-        void SetAlarmSucceeds()
-        {
-            // Arrange
-            AlarmWarning sut;
+    void SetAlarmSucceeds()
+    {
+        // Arrange
+        AlarmWarning sut;
 
-            // Act
-            sut.SetAlarm(Victron::LowBatteryVoltageAlarm);
+        // Act
+        sut.SetAlarm(Victron::LowBatteryVoltageAlarm);
 
-            // Assert
-            auto result = sut.Alarm.test(Victron::LowBatteryVoltageAlarm);
-            TEST_ASSERT_TRUE_MESSAGE(result, sut.Alarm.to_string().c_str());
-        }
+        // Assert
+        auto result = sut.Alarm.test(Victron::LowBatteryVoltageAlarm);
+        TEST_ASSERT_TRUE_MESSAGE(result, sut.Alarm.to_string().c_str());
+    }
 
-        void ResetAlarmSucceeds()
-        {
-            // Arrange
-            AlarmWarning sut
-            { 
-                .Alarm = Victron::CellImbalanceAlarm
-            };
+    void ResetAlarmSucceeds()
+    {
+        // Arrange
+        AlarmWarning sut
+        { 
+            .Alarm = Victron::CellImbalanceAlarm
+        };
 
-            // Act
-            sut.ResetAlarm(Victron::CellImbalanceAlarm);
+        // Act
+        sut.ResetAlarm(Victron::CellImbalanceAlarm);
 
-            // Assert
-            auto result = sut.Alarm.test(Victron::CellImbalanceAlarm);
-            TEST_ASSERT_FALSE(result);
-        }
+        // Assert
+        auto result = sut.Alarm.test(Victron::CellImbalanceAlarm);
+        TEST_ASSERT_FALSE(result);
+    }
 
-        void ResetWarningsSucceeds()
-        {
-            // Arrange
-            AlarmWarning sut;
+    void ResetWarningsSucceeds()
+    {
+        // Arrange
+        AlarmWarning sut;
 
-            // Act
-            sut.ResetWarning();
+        // Act
+        sut.ResetWarning();
 
-            // Assert
-            auto result = sut.Warning.any();
-            TEST_ASSERT_FALSE(result);
-        }
+        // Assert
+        auto result = sut.Warning.any();
+        TEST_ASSERT_FALSE(result);
+    }
 
-        void InitWarningSucceeds()
-        {
-            // Arrange
-            // Act
-            AlarmWarning sut
-            { 
-                .Warning = 1 << Victron::LowChargeTemperatureWarning
-            };
-            
-            // Assert
-            auto result = sut.Warning.test(Victron::LowChargeTemperatureWarning);
-            TEST_ASSERT_TRUE_MESSAGE(result, sut.Warning.to_string().c_str());
-        }
-
-        void SetWarningSucceeds()
-        {
-            // Arrange
-            AlarmWarning sut;
-
-            // Act
-            sut.SetWarning(Victron::InternalFailureWarning);
-
-            // Assert
-            auto result = sut.Warning.test(Victron::InternalFailureWarning);
-            TEST_ASSERT_TRUE_MESSAGE(result, sut.Warning.to_string().c_str());
-        }
+    void InitWarningSucceeds()
+    {
+        // Arrange
+        // Act
+        AlarmWarning sut
+        { 
+            .Warning = 1 << Victron::LowChargeTemperatureWarning
+        };
         
-        void ResetWarningSucceeds()
-        {
-            // Arrange
-            AlarmWarning sut
-            { 
-                .Warning = Victron::HighChargeCurrentWarning
-            };
+        // Assert
+        auto result = sut.Warning.test(Victron::LowChargeTemperatureWarning);
+        TEST_ASSERT_TRUE_MESSAGE(result, sut.Warning.to_string().c_str());
+    }
 
-            // Act
-            sut.ResetWarning(Victron::HighChargeCurrentWarning);
+    void SetWarningSucceeds()
+    {
+        // Arrange
+        AlarmWarning sut;
 
-            // Assert
-            auto result = sut.Warning.test(Victron::HighChargeCurrentWarning);
-            TEST_ASSERT_FALSE(result);
-        }
-        
-        int runUnityTestsAlarmWarning(void)
-        {
-            UNITY_BEGIN();
+        // Act
+        sut.SetWarning(Victron::InternalFailureWarning);
 
-            RUN_TEST(ResetAllSucceeds);
+        // Assert
+        auto result = sut.Warning.test(Victron::InternalFailureWarning);
+        TEST_ASSERT_TRUE_MESSAGE(result, sut.Warning.to_string().c_str());
+    }
+    
+    void ResetWarningSucceeds()
+    {
+        // Arrange
+        AlarmWarning sut
+        { 
+            .Warning = Victron::HighChargeCurrentWarning
+        };
 
-            RUN_TEST(ResetAlarmsSucceeds);
-            RUN_TEST(InitAlarmSucceeds);
-            RUN_TEST(SetAlarmSucceeds);
-            RUN_TEST(ResetAlarmSucceeds);
+        // Act
+        sut.ResetWarning(Victron::HighChargeCurrentWarning);
 
-            RUN_TEST(ResetWarningsSucceeds);
-            RUN_TEST(InitWarningSucceeds);
-            RUN_TEST(SetWarningSucceeds);
-            RUN_TEST(ResetWarningSucceeds);
-
-            return UNITY_END();
-        }
+        // Assert
+        auto result = sut.Warning.test(Victron::HighChargeCurrentWarning);
+        TEST_ASSERT_FALSE(result);
     }
 }

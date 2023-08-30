@@ -5,13 +5,11 @@
 
 #include <unity.h>
 
-#include "test_Dvcc.hpp"
-#include "test_StateInfo.hpp"
-#include "test_AlarmWarning.hpp"
+#include "test_Threading.hpp"
 
 extern "C"
 {
-    namespace test::envNative::test_Victron
+    namespace test::envNative::test_Threading
     {
         void setUp(void)
         {
@@ -27,17 +25,16 @@ extern "C"
         {
             UNITY_BEGIN();
 
-            runUnityTestsDvcc();
-            runUnityTestsStateInfo();
-            runUnityTestsAlarmWarning();
+            RUN_TEST(RetrySucceeds);
 
-            return 0;
+            return UNITY_END();
         }
 
         void app_main() 
         {
             runUnityTests();
         }
+
 
         int main(int argc, char **argv)
         {
