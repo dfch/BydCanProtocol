@@ -59,7 +59,8 @@
 			"complex": "cpp",
 			"sstream": "cpp",
 			"set": "cpp",
-			"ctime": "cpp"
+			"ctime": "cpp",
+			"span": "cpp"
 		}
 	}
 }
