@@ -47,7 +47,8 @@ namespace Threading
     class Retry
     {
         public:
-            static TResult Invoke(std::function<TResult()> func, RetryStrategyBase& strategy)
+            template<typename TFunc, typename TFuncDefaultResult>
+            static TResult Invoke(TFunc&& func, RetryStrategyBase& strategy, TFuncDefaultResult&& defaultResult)
             {
                 TResult result;
                 uint32_t waitTimeMilliseconds = strategy.WaitTimeIntervalMinMilliseconds;
@@ -73,20 +74,18 @@ namespace Threading
                     struct timespec tsNow;
                     clock_gettime(CLOCK_REALTIME, &tsNow);
                     
-                    auto diffMilliseconds = (tsNow.tv_sec - tsStart.tv_sec) * 1e3 + 
-                        (tsNow.tv_nsec - tsStart.tv_nsec) / 1e6;
-                    if(diffMilliseconds >= strategy.WaitTimeMaxMilliseconds) break;
+                    auto elapsedMilliseconds = (tsNow.tv_sec - tsStart.tv_sec) * 1'000 + 
+                        (tsNow.tv_nsec - tsStart.tv_nsec) / 1'000'000;
+                    if(elapsedMilliseconds >= strategy.WaitTimeMaxMilliseconds) break;
 
                     auto nextWaitTime = strategy.GetNextWaitTime(waitTimeMilliseconds);
                     waitTimeMilliseconds = std::min(nextWaitTime, strategy.WaitTimeIntervalMaxMilliseconds);
                     // Temporarily disabled because we do not want to use Thread.h
                     // Threading::Thread::Sleep(waitTimeMilliseconds);
-                    usleep(waitTimeMilliseconds * 1000);
+                    usleep(waitTimeMilliseconds * 1'000);
                 }
 
-                return defaultResult;
+                return defaultResult();
             }
-        private:
-            static const TResult defaultResult();
     };
 }
