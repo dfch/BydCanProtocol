@@ -37,4 +37,21 @@ namespace test::envNative::test_Threading
 
         TEST_ASSERT_EQUAL(expected, counter);
     }
+
+    void InvokingRetryWithDefaultResultSucceeds()
+    {
+        int arbitraryDefaultResult = 42;
+        auto const expected = 3;
+        auto counter = 0;
+
+        RetryStrategyFixed strategy;
+        strategy.WaitTimeMaxMilliseconds = 100;
+
+        auto result = Retry<int>::Invoke([&counter, expected]() mutable -> int
+        {
+            throw std::runtime_error("Exception thrown on purpose to simulate a failure.");
+        }, strategy, [arbitraryDefaultResult] { return arbitraryDefaultResult; });
+
+        TEST_ASSERT_EQUAL(arbitraryDefaultResult, result);
+    }
 }

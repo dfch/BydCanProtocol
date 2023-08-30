@@ -5,7 +5,7 @@
 
 #include <unity.h>
 
-#include "test_Threading.hpp"
+#include "test_Retry.hpp"
 
 extern "C"
 {
@@ -26,6 +26,7 @@ extern "C"
             UNITY_BEGIN();
 
             RUN_TEST(RetrySucceeds);
+            RUN_TEST(InvokingRetryWithDefaultResultSucceeds);
 
             return UNITY_END();
         }
@@ -34,7 +35,6 @@ extern "C"
         {
             runUnityTests();
         }
-
 
         int main(int argc, char **argv)
         {
