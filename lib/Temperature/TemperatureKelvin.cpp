@@ -28,7 +28,7 @@ namespace Temperature
     TemperatureKelvin::TemperatureKelvin(float value)
         : TemperatureBase(value)
     {
-        Contract::Requires([value] { return value >= 0; });
+        Contract::Expects([value] { return value >= 0; });
     }
 
     float TemperatureKelvin::GetValue()
@@ -38,7 +38,7 @@ namespace Temperature
 
     TemperatureKelvin& TemperatureKelvin::SetValue(float value)
     {
-        Contract::Requires([value] { return value >= 0; });
+        Contract::Expects([value] { return value >= 0; });
 
         Value = ToKelvin(value);
 

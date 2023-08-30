@@ -16,8 +16,8 @@ namespace Byd
     {
         constexpr size_t Length = 8;
         
-        Contract::Requires([destination] { return nullptr != destination; });
-        Contract::Requires([size] { return 0 < size; });
+        Contract::Expects([destination] { return nullptr != destination; });
+        Contract::Expects([size] { return 0 < size; });
 
         size_t result = std::min(Length, size);
         

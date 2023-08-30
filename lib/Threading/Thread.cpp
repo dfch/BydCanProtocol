@@ -35,6 +35,6 @@ namespace Threading
         #endif
 
         auto result = pthread_create(&threadId, &attributes, start_routine, arg);
-        Contract::Requires([result] { return 0 == result; }, NAMEOF(result));
+        Contract::Expects([result] { return 0 == result; }, NAMEOF(result));
     }
 }

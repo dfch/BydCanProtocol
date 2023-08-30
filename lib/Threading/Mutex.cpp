@@ -16,7 +16,7 @@ namespace Threading
     Mutex::Mutex()
     {
         auto result = pthread_mutex_init(&mutex, NULL);
-        Contract::Requires([result] { return 0 == result; }, "Mutex could not be created.");
+        Contract::Expects([result] { return 0 == result; }, "Mutex could not be created.");
     }
 
     Mutex::~Mutex()
@@ -28,7 +28,7 @@ namespace Threading
 
     Mutex::Mutex(Mutex&& other) noexcept
     {
-        Contract::Requires([&other] { return nullptr != &other.mutex; }, "Mutex is not initialized.");
+        Contract::Expects([&other] { return nullptr != &other.mutex; }, "Mutex is not initialized.");
 
         mutex = other.mutex;
         other.mutex = (pthread_mutex_t) nullptr;
@@ -44,7 +44,7 @@ namespace Threading
         if (Timeout::Infinite == timeout)
         {
             auto result = pthread_mutex_lock(&mutex);
-            Contract::Requires([result] { return 0 == result; }, "Mutex could not be locked.");
+            Contract::Expects([result] { return 0 == result; }, "Mutex could not be locked.");
 
             return true;
         }

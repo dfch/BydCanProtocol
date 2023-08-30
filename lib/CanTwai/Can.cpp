@@ -346,7 +346,7 @@ namespace CanTwai
         cellInfo.CellTemperaureMinimumName = "2";
         cellInfo.CellTemperaureMaximumName = "1";
         auto v = Message::Factory::CreateCellInfo(cellInfo);
-        Contract::Requires([v] { return 5 == v.size(); });
+        Contract::Expects([v] { return 5 == v.size(); });
 
         data = v.at(0);
         message = CreateMessage(data);
@@ -379,7 +379,7 @@ namespace CanTwai
 
     twai_message_t Can::CreateMessage(std::shared_ptr<Byd::Message> data)
     {
-        Contract::Requires([data] { return nullptr != data; });
+        Contract::Expects([data] { return nullptr != data; });
 
         twai_message_t result;
 
@@ -389,7 +389,7 @@ namespace CanTwai
         result.identifier = (uint32_t) data->Id;
 
         auto bytesCopied = raw.Bytes.CopyTo(result.data, sizeof(result.data), true);
-        Contract::Requires([bytesCopied] { return Byd::DataLength == bytesCopied; });
+        Contract::Expects([bytesCopied] { return Byd::DataLength == bytesCopied; });
         result.data_length_code = bytesCopied;
 
         return result;

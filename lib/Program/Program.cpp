@@ -45,7 +45,7 @@ namespace Program
 
     void Program::OutputFunc(void *pvParameters)
     {
-        Contract::Requires([pvParameters] { return nullptr != pvParameters; }, NAMEOF(pvParameters));
+        Contract::Expects([pvParameters] { return nullptr != pvParameters; }, NAMEOF(pvParameters));
         
         auto instance = (Program*) pvParameters;
 
@@ -78,7 +78,7 @@ namespace Program
         while(true)
         {
             auto result = twai->EmulateByd();
-            Contract::Requires([result] { return result; });
+            Contract::Expects([result] { return result; });
 
             Threading::Thread::Sleep(waitTimeoutMs);
         }
