@@ -54,7 +54,8 @@ namespace test::envNative::test_Collections
 
     void TestConcurrentThreadsSucceeds()
     {
-        ConcurrentRingBuffer<int, 64> buffer;
+        constexpr size_t size = 64; 
+        ConcurrentRingBuffer<int, size> buffer;
         const size_t itemCount = 1000;
 
         size_t itemsEnqueued;
@@ -89,5 +90,6 @@ namespace test::envNative::test_Collections
 
         TEST_ASSERT_EQUAL(itemCount, itemsEnqueued);
         TEST_ASSERT_LESS_THAN(itemCount, dequeuedItems.size());
+        TEST_ASSERT_GREATER_OR_EQUAL(size, dequeuedItems.size());
     }
 }
