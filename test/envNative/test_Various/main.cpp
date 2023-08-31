@@ -7,6 +7,7 @@
 
 #include "test_Thing.hpp"
 #include "test_Vector.hpp"
+#include "test_UniquePtr.hpp"
 
 extern "C"
 {
@@ -26,9 +27,14 @@ extern "C"
         {
             UNITY_BEGIN();
 
+            // #include "test_Thing.hpp"
             RUN_TEST(MakeUniqueAccessingPrivateCtorSucceeds);
 
+            // #include "test_Vector.hpp"
             RUN_TEST(TestVector);
+            
+            // #include "test_UniquePtr.hpp"
+            RUN_TEST(InstantiatingCtorWithUniquePtrSucceeds);
 
             return UNITY_END();
         }
