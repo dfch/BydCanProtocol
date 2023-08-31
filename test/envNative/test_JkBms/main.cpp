@@ -28,10 +28,16 @@ extern "C"
         {
             UNITY_BEGIN();
 
+            // #include "test_Rs485.hpp"
             RUN_TEST(CreatingInstanceFromVectorSucceeds);
-            RUN_TEST(AccessingDataWithIndexOperatorSucceeds);
+            RUN_TEST(CreatingInstanceFromUniquePtrVectorSucceeds);
             RUN_TEST(AccessingDataWithInvalidIndexThrows);
+            RUN_TEST(GettingLengthSucceeds);
+            RUN_TEST(GettingDataSucceeds);
+            RUN_TEST(InstantiatingMovesVectorMemory);
 
+            // #include "test_IsValid.hpp"
+            RUN_TEST(IsValidFails);
             RUN_TEST(IsValidWithInvalidMinimumLengthFails);
             RUN_TEST(IsValidWithInvalidLengthFails);
             RUN_TEST(IsValidWithValidLengthSucceeds);

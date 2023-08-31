@@ -24,22 +24,13 @@ namespace test::envNative::test_JkBms
         TEST_ASSERT_EQUAL_UINT8(0x03, static_cast<uint8_t>(sut[2]));
     }
 
-    void CreatingInstanceFromArraySucceeds()
+    void CreatingInstanceFromUniquePtrVectorSucceeds()
     {
         std::vector<std::uint8_t> data { 0x01, 0x02, 0x03 };
 
-        Rs485 sut(data.data(), 3);
+        auto ptr = std::make_unique<std::vector<uint8_t>>(std::move(data));
 
-        TEST_ASSERT_EQUAL_UINT8(0x01, static_cast<uint8_t>(sut[0]));
-        TEST_ASSERT_EQUAL_UINT8(0x02, static_cast<uint8_t>(sut[1]));
-        TEST_ASSERT_EQUAL_UINT8(0x03, static_cast<uint8_t>(sut[2]));
-    }
-
-    void AccessingDataWithIndexOperatorSucceeds()
-    {
-        std::vector<std::uint8_t> data { 0x01, 0x02, 0x03 };
-
-        Rs485 sut(data);
+        Rs485 sut(std::move(ptr));
 
         TEST_ASSERT_EQUAL_UINT8(0x01, static_cast<uint8_t>(sut[0]));
         TEST_ASSERT_EQUAL_UINT8(0x02, static_cast<uint8_t>(sut[1]));
@@ -62,5 +53,38 @@ namespace test::envNative::test_JkBms
 
             TEST_ASSERT_TRUE(std::string::npos != result.find("0x0003"));
         }
+    }
+
+    void GettingLengthSucceeds()
+    {
+        std::vector<std::uint8_t> data { 0x01, 0x02, 0x03 };
+
+        Rs485 sut(data);
+
+        auto result = sut.Length();
+
+        TEST_ASSERT_EQUAL(3, result);
+    }
+
+    void GettingDataSucceeds()
+    {
+        std::vector<std::uint8_t> data { 0x01, 0x02, 0x03 };
+
+        Rs485 sut(data);
+
+        auto result = sut.Data();
+
+        TEST_ASSERT_EQUAL_UINT8(0x01, result[0]);
+        TEST_ASSERT_EQUAL_UINT8(0x02, result[1]);
+        TEST_ASSERT_EQUAL_UINT8(0x03, result[2]);
+    }
+
+    void InstantiatingMovesVectorMemory()
+    {
+        std::vector<std::uint8_t> data { 0x01, 0x02, 0x03 };
+
+        Rs485 sut(data);
+
+        TEST_ASSERT_EQUAL(0, data.size());
     }
 }

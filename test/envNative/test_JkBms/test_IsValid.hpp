@@ -13,7 +13,7 @@ namespace test::envNative::test_JkBms
 {
     using namespace JkBms;
     
-    void IsValidWithInvalidMinimumLengthFails()
+    void IsValidFails()
     {
         std::vector<std::uint8_t> data 
         { 
@@ -37,6 +37,34 @@ namespace test::envNative::test_JkBms
         Rs485 sut(data);
 
         auto result = sut.IsValid();
+
+        TEST_ASSERT_FALSE(result);
+    }
+
+    void IsValidWithInvalidMinimumLengthFails()
+    {
+        std::vector<std::uint8_t> data 
+        { 
+            // Header
+            0x4E, 0x57, // StartOfFrame
+            0x00, 0x00, // Length
+            0xFF, 0xFF, 0xFF, 0xFF, // BMS terminal number
+            0x00, // Command word,
+            0x00, // Frame source,
+            0x00, // TransmissionType
+            
+            // Body
+            // ... empty here
+            
+            // Footer
+            0x00, 0x11, 0x22, 0xAD, // Record number
+            0x68, // End code
+            0x12, 0x34, 0x56, 0x78 // CRC
+        };
+
+        Rs485 sut(data);
+
+        auto result = sut.GetValidationResult();
 
         TEST_ASSERT_EQUAL_UINT8(ValidationResult::FrameTooShort, result);
     }
@@ -65,7 +93,7 @@ namespace test::envNative::test_JkBms
 
         Rs485 sut(data);
 
-        auto result = sut.IsValid();
+        auto result = sut.GetValidationResult();
 
         TEST_ASSERT_EQUAL_UINT8(ValidationResult::InvalidLength, result);
     }
@@ -93,7 +121,7 @@ namespace test::envNative::test_JkBms
 
         Rs485 sut(data);
 
-        auto result = sut.IsValid();
+        auto result = sut.GetValidationResult();
 
         TEST_ASSERT_EQUAL_UINT8(ValidationResult::Success, result);
     }
@@ -122,7 +150,7 @@ namespace test::envNative::test_JkBms
 
         Rs485 sut(data);
 
-        auto result = sut.IsValid();
+        auto result = sut.GetValidationResult();
 
         TEST_ASSERT_EQUAL_UINT8(ValidationResult::InvalidChecksum, result);
     }
@@ -151,7 +179,7 @@ namespace test::envNative::test_JkBms
 
         Rs485 sut(data);
 
-        auto result = sut.IsValid();
+        auto result = sut.GetValidationResult();
 
         TEST_ASSERT_EQUAL_UINT8(ValidationResult::Success, result);
     }
@@ -180,7 +208,7 @@ namespace test::envNative::test_JkBms
 
         Rs485 sut(data);
 
-        auto result = sut.IsValid();
+        auto result = sut.GetValidationResult();
 
         TEST_ASSERT_EQUAL_UINT8(ValidationResult::InvalidIdentifier, result);
     }
