@@ -28,7 +28,7 @@ namespace Collections
             /// @return Returns true, if the item could be enqueued without overwriting the buffer; false, otherwise.
             bool Enqueue(T value) override
             {
-                const std::lock_guard<std::mutex> lock(mutex);
+                const std::scoped_lock<std::mutex> lock(mutex);
 
                 return RingBuffer<T, TSize>::Enqueue(value);
             }
@@ -37,7 +37,7 @@ namespace Collections
             /// @return Returns an item of type T; or NULL, if queue is empty.
             std::optional<T> Dequeue() override
             {
-                const std::lock_guard<std::mutex> lock(mutex);
+                const std::scoped_lock<std::mutex> lock(mutex);
                 
                 return RingBuffer<T, TSize>::Dequeue();
             }
