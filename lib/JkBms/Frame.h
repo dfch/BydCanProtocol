@@ -33,8 +33,7 @@ namespace JkBms
         {
             Contract::Expects([this] 
             {
-                return nullptr != this->Header &&
-                nullptr != this->Footer;
+                return nullptr != this->Header && nullptr != this->Footer;
             });
 
             uint32_t result { 0 };
@@ -53,6 +52,8 @@ namespace JkBms
         /// @return Return true, if the checksum is valid; false, otherwise.
         bool IsValidChecksum() const noexcept
         {
+            if(nullptr == Header || nullptr == Body || nullptr == Footer ) return false;
+
             auto calc = CalculateChecksum();
             auto stor = this->Footer->Checksum.ToLittleEndian();
             auto result = calc == stor;
