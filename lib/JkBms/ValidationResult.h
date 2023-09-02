@@ -12,6 +12,7 @@ namespace JkBms
     enum class ValidationResult : uint8_t
     {
         Success = 0x00,
+        NotParsed,
         FrameTooShort,
         InvalidHeader,
         InvalidLength,
