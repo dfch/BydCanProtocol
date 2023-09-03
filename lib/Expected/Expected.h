@@ -45,12 +45,14 @@ namespace Expected
             {
                 unexpected = other;
 
+                this->reset();
+
                 return *this;
             }
 
             E error() const 
             {
-                if(std::optional<T>::has_value()) throw std::logic_error("true == expected::has_value()");
+                if(std::optional<T>::has_value()) throw std::logic_error("error(): true == expected::has_value()");
 
                 return unexpected.value(); 
             }
