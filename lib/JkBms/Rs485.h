@@ -8,16 +8,16 @@
 #include <vector>
 #include <cstdint>
 #include <memory>
-
-#include "Frame.h"
-
-#include "ValidationResult.h"
+#include <map>
 
 #ifdef __cpp_lib_expected
     #include <expected>
 #else
     #include "Expected.h"
 #endif
+
+#include "Frame.h"
+#include "ValidationResult.h"
 
 namespace JkBms
 {
@@ -60,8 +60,7 @@ namespace JkBms
             /// @brief Returns the data as a vector of bytes.
             const vector<uint8_t>& Data() const { return *ptr; }
 
-            /// @brief Returns the parsed frame.
-            const expected<Frame, ValidationResult>& Frame() const { return frame; }
+            const std::map<Id, Frame> Frames() const;
 
             /// @brief Determines wether the frame is valid.
             /// @return True, if the frame is valid; false, otherwise.

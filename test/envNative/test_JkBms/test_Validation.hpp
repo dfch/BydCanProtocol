@@ -13,6 +13,35 @@ namespace test::envNative::test_JkBms
 {
     using namespace JkBms;
     
+    void IsValidSucceeds()
+    {
+        std::vector<std::uint8_t> data 
+        { 
+            // Header
+            0x4E, 0x57, // StartOfFrame [00:01]
+            0x00, 0x13, // Valid length [02:03]
+            0x00, 0x00, 0x00, 0x00, // BMS terminal number [04:07]
+            0x06, // Command word, [08]
+            0x03, // Frame source, [09]
+            0x00, // TransmissionType [10]
+            
+            // Body
+            // arbitrary data here
+            0x00,  // [11]
+            
+            // Footer
+            0x00, 0x00, 0x00, 0x00, // Record number [12:15]
+            0x68, // End code [16]
+            0x00, 0x00, 0x01, 0x29 // CRC [17:20]
+        };
+
+        Rs485 sut(data);
+        
+        auto result = sut.IsValid();
+
+        TEST_ASSERT_TRUE(result);
+    }
+
     void IsValidFails()
     {
         std::vector<std::uint8_t> data 
@@ -213,110 +242,40 @@ namespace test::envNative::test_JkBms
         TEST_ASSERT_EQUAL_UINT8(ValidationResult::InvalidIdentifier, result);
     }
 
-    void TestingCellVoltageSucceeds(void)
+    void GettingFramesSucceeds()
     {
         std::vector<std::uint8_t> data 
-        {
-            0x79, // Battery voltage.
+        { 
+            // Header
+            0x4E, 0x57, // StartOfFrame [00:01]
+            0x00, 34 - sizeof(StartOfFrame), // Valid length [02:03]
+            0x00, 0x00, 0x00, 0x00, // BMS terminal number [04:07]
+            0x06, // Command word, [08]
+            0x03, // Frame source, [09]
+            0x00, // TransmissionType [10]
+            
+            // Body
+            (uint8_t) Id::CellVoltage, // Battery voltage.
             4 * 3, // Number of cells multiplied by size of cell information.
             0x01, 0x0E, 0xED, // 3821 * 0.001 = 3.821V
             0x02, 0x0E, 0xFA, // 3834 * 0.001 = 3.834V
             0x03, 0x0E, 0xF7, // 3831 * 0.001 = 3.831V
             0x04, 0x0E, 0xEC, // 3820 * 0.001 = 3.820V
+            
+            // Footer
+            0x00, 0x00, 0x00, 0x00, // Record number [12:15]
+            0x68, // End code [16]
+            0x00, 0x00, 0x05, 0xC7 // CRC [17:20]
         };
+        TEST_ASSERT_EQUAL(34, data.size());
 
-        auto sut = reinterpret_cast<CellVoltage*>(data.data());
+        Rs485 sut(data);
 
-        TEST_ASSERT_EQUAL_UINT8(0x79, sut->Identifier.Value);
-        TEST_ASSERT_EQUAL_UINT16(4 * 3, sut->Length);
-        TEST_ASSERT_EQUAL(4, sut->CellCount());
-        
-        auto c00 = sut->CellInfos[0];
-        TEST_ASSERT_EQUAL_UINT8(1, c00.Number.Value);
-        TEST_ASSERT_EQUAL(3821, c00.MilliVolt.ToLittleEndian());
-        
-        auto c01 = sut->CellInfos[1];
-        TEST_ASSERT_EQUAL_UINT8(2, c01.Number.Value);
-        TEST_ASSERT_EQUAL(3834, c01.MilliVolt.ToLittleEndian());
+        TEST_ASSERT_TRUE(sut.IsValid());
 
-        auto c02 = sut->CellInfos[2];
-        TEST_ASSERT_EQUAL_UINT8(3, c02.Number.Value);
-        TEST_ASSERT_EQUAL(3831, c02.MilliVolt.ToLittleEndian());
+        auto result = sut.Frames();
 
-        auto c03 = sut->CellInfos[3];
-        TEST_ASSERT_EQUAL_UINT8(4, c03.Number.Value);
-        TEST_ASSERT_EQUAL(3820, c03.MilliVolt.ToLittleEndian());
-
-        auto result = sut->GetAverageVoltageMilliVolt();
-        TEST_ASSERT_EQUAL_UINT16((3821 + 3834 + 3831 + 3820) / 4, result);
-    }
-
-    void ValdiatingNumberSucceeds()
-    {
-        #pragma pack(push, 1)
-        struct tagArbitraryStruct
-        {
-            uint8_t Number;
-            Id Id;
-        };
-        #pragma pack(pop)
-        
-        std::vector<std::uint8_t> data 
-        { 
-            0x42,
-            0x79,
-        };
-
-        auto sut = reinterpret_cast<const tagArbitraryStruct*>(data.data());
-
-        TEST_ASSERT_EQUAL_UINT8(0x42, sut->Number);
-    }
-
-    void ValdiatingIdentifierSucceeds()
-    {
-        #pragma pack(push, 1)
-        struct tagArbitraryStruct
-        {
-            uint8_t Number;
-            Identifier Identifier;
-        };
-        #pragma pack(pop)
-        
-        std::vector<std::uint8_t> data 
-        { 
-            0x42,
-            0x79,
-        };
-
-        auto sut = reinterpret_cast<const tagArbitraryStruct*>(data.data());
-
-        auto result = sut->Identifier.IsValid();
-
-        TEST_ASSERT_TRUE(result);
-        TEST_ASSERT_EQUAL(Id::CellVoltage, sut->Identifier.Value);
-    }
-
-    void ValdiatingIdentifierFails()
-    {
-        #pragma pack(push, 1)
-        struct tagArbitraryStruct
-        {
-            uint8_t Number;
-            Identifier Identifier;
-        };
-        #pragma pack(pop)
-        
-        std::vector<std::uint8_t> data 
-        { 
-            0x42,
-            0xCC,
-        };
-
-        auto sut = reinterpret_cast<const tagArbitraryStruct*>(data.data());
-
-        auto result = sut->Identifier.IsValid();
-
-        TEST_ASSERT_FALSE(result);
-        TEST_ASSERT_NOT_EQUAL(Id::CellVoltage, sut->Identifier.Value);
+        TEST_ASSERT_EQUAL(1, result.size());
+        TEST_ASSERT_EQUAL(Id::CellVoltage, result.begin()->first);
     }
 }

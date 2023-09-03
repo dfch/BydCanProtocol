@@ -6,7 +6,9 @@
 #include <unity.h>
 
 #include "test_Rs485.hpp"
-#include "test_IsValid.hpp"
+#include "test_Validation.hpp"
+#include "test_CellVoltage.hpp"
+#include "test_Identifier.hpp"
 
 extern "C"
 {
@@ -36,7 +38,8 @@ extern "C"
             RUN_TEST(GettingDataSucceeds);
             RUN_TEST(InstantiatingMovesVectorMemory);
 
-            // #include "test_IsValid.hpp"
+            // #include "test_Validation.hpp"
+            RUN_TEST(IsValidSucceeds);
             RUN_TEST(IsValidFails);
             RUN_TEST(IsValidWithInvalidMinimumLengthFails);
             RUN_TEST(IsValidWithInvalidLengthFails);
@@ -44,13 +47,16 @@ extern "C"
             RUN_TEST(IsValidWithInvalidChecksumFails);
             RUN_TEST(IsValidWithValidChecksumSucceeds);
             RUN_TEST(IsValidWithInvalidIdentifierFails);
+            RUN_TEST(GettingFramesSucceeds);
 
+            // #include "test_CellVoltage.hpp"
             RUN_TEST(TestingCellVoltageSucceeds);
             
+            // #include "test_Identifier.hpp"
             RUN_TEST(ValdiatingNumberSucceeds);
             RUN_TEST(ValdiatingIdentifierSucceeds);
             RUN_TEST(ValdiatingIdentifierFails);
-
+            
             return UNITY_END();
         }
 
