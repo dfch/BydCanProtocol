@@ -49,6 +49,7 @@ extern "C"
             RUN_TEST(GettingFramesSucceeds);
 
             // #include "test_CellVoltage.hpp"
+            RUN_TEST(TestingCellVoltageIdentifierSucceeds);
             RUN_TEST(TestingCellVoltageSucceeds);
             
             // #include "test_Identifier.hpp"

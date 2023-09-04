@@ -4,14 +4,32 @@
 
 #include <unity.h>
 
-#include <Rs485.h>
-#include <Frame.h>
-#include <Qword.h>
+#include <Identifiers/CellVoltage.h>
 
 namespace test::envNative::test_JkBms
 {
     using namespace JkBms;
+    using namespace JkBms::Identifiers;
     
+    void TestingCellVoltageIdentifierSucceeds(void)
+    {
+        std::vector<std::uint8_t> data 
+        {
+            0x79, // Battery voltage.
+            4 * 3, // Number of cells multiplied by size of cell information.
+            0x01, 0x0E, 0xED, // 3821 * 0.001 = 3.821V
+            0x02, 0x0E, 0xFA, // 3834 * 0.001 = 3.834V
+            0x03, 0x0E, 0xF7, // 3831 * 0.001 = 3.831V
+            0x04, 0x0E, 0xEC, // 3820 * 0.001 = 3.820V
+        };
+
+        auto sut = reinterpret_cast<CellVoltage*>(data.data());
+
+        auto result = sut->Identifier.Value;
+
+        TEST_ASSERT_EQUAL_UINT8(0x79, result);
+    }
+
     void TestingCellVoltageSucceeds(void)
     {
         std::vector<std::uint8_t> data 

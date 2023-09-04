@@ -13,8 +13,9 @@
 
 #include "Identifier.h"
 
-namespace JkBms
+namespace JkBms::Identifiers
 {
+    using namespace JkBms;
     using namespace Endian;
 
     #pragma pack(push, 1)
@@ -39,7 +40,7 @@ namespace JkBms
         /// @brief Returns the number of cells.
         const size_t CellCount() const noexcept 
         {
-            Contract::Expects([this] { return 0 == this->Length % sizeof(tagCellInfo); }, "Invalid value: Length");
+            Contract::Expects([this] { return 0 == this->Length % sizeof(tagCellInfo); }, NAMEOF(CellVoltage::CellCount) " Invalid value: Length");
 
             return Length / sizeof(tagCellInfo); 
         }
