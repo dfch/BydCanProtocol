@@ -21,14 +21,19 @@ namespace JkBms
     /// @brief Battery voltage information. Each cell is represented by a CellInfo.
     struct tagCellVoltage
     {
+        /// @brief BMS settings identifier.
         Identifier Identifier;
 
-        uint8_t Length; // Number of bytes of the following data.
+        /// @brief Number of bytes of the following data.
+        uint8_t Length;
 
+        /// @brief Voltage information for a single cell.
         struct tagCellInfo
         {
-            Byte Number; // Number of the cell.
-            Word MilliVolt; // Voltage of the cell in milli volt. Big endian.
+            /// @brief Number of the cell.
+            Byte Number;
+            /// @brief Voltage of the cell in milli volt. Big endian.
+            Word MilliVolt;
         } CellInfos[]; // Cell information.
         
         /// @brief Returns the number of cells.
