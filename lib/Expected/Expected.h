@@ -9,6 +9,10 @@
 
 namespace Expected
 {
+    #ifdef __cpp_lib_expected
+        #pragma warn("'expected' is already defined.")
+    #endif
+
     /// @brief Simple version of expected similar to C++23 without all the functionality. 
     /// Can story an expected value and an unexpected value. Uses std::optional internally.
     /// @tparam T The execpted value.
