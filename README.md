@@ -101,7 +101,7 @@ Things to note:
 |     |                         |          | [00:01] "4C 69" product code, always seen that value |
 |     |                         |          | [02:03] "01 17" v1.17 firmware version |
 |     |                         |          | [04:05] "69 00" (Ah) 105Ah capacity available |
-|     |                         |          | [06:07] *???* always found to be null |
+|     |                         |          | [06:07] *???* always found to be null, might be hardware version according to [MrConstantin84](https://secondlifestorage.com/index.php?members/mrconstantin84.38213/) |
 | 360 | 00 00 00 00 00 00 00 00 | ........ | *???* always found to be null |
 | 361 |                         |          | *not seen* |
 | 362 |                         |          | *not seen* |
@@ -129,6 +129,9 @@ Things to note:
 |     |                         | ........ | BYD system sent these frames upon first power up: |
 |     | 02 00 02 00 01 00 00 00 | ........ | Frame 01 |
 |     | 02 00 00 00 00 00 00 00 | ........ | Frame 02 + consecutive frames |
+|     |                         | ........ | according to [MrConstantin84](https://secondlifestorage.com/index.php?members/mrconstantin84.38213/) might be:  |
+|     |                         | ........ | [02:03] "00 00" block charge |
+|     |                         | ........ | [04:05] "00 00" block discharge |
 | 373 | EA 0C 01 0D 1F 01 22 01 | ......". | [CellInfo](../main/lib/Byd/Messages/CellInfo.h): Cell Voltage and Temperature |
 |     |                         |          | [00:01] "EA 0C" (mV) 3.306V Lowest Cell Voltage, see 374 |
 |     |                         |          | [02:03] "01 0D" (mV) 3.329V Highest Cell Voltage, see 375 |
