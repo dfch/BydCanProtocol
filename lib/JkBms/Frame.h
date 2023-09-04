@@ -33,7 +33,7 @@ namespace JkBms
             Contract::Expects([this] 
             {
                 return nullptr != this->Header && nullptr != this->Footer;
-            });
+            }, NAMEOF(CalculateChecksum));
 
             uint32_t result { 0 };
 
