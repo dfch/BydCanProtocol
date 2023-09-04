@@ -59,7 +59,7 @@ namespace JkBms
             /// @brief Returns the data as a vector of bytes.
             const vector<uint8_t>& Data() const { return *ptr; }
 
-            const std::map<Id, Frame> Frames() const;
+            const std::map<Id, Frame> Messages() const;
 
             /// @brief Determines wether the frame is valid.
             /// @return True, if the frame is valid; false, otherwise.

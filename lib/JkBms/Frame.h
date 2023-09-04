@@ -7,6 +7,7 @@
 #include <cstdint>
 #include <cstddef>
 
+#include <Contract.h>
 #include <Dword.h>
 
 #include "Header.h"

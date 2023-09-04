@@ -36,7 +36,7 @@ namespace JkBms
         return result;
     }
 
-    const std::map<Id, Frame> Rs485::Frames() const
+    const std::map<Id, Frame> Rs485::Messages() const
     {
         std::map<Id, Frame> result;
 

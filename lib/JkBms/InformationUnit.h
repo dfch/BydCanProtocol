@@ -8,11 +8,10 @@
 
 #include "Identifier.h"
 
-#include "Identifier/CellVoltage.h"
-
 namespace JkBms
 {
     #pragma pack(push, 1)
+    /// @brief Basic body data unit of a frame.
     struct tagInformationUnit
     {
         Identifier Identifier;
