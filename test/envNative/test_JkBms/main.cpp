@@ -7,6 +7,7 @@
 #include "test_Rs485.hpp"
 #include "test_Validation.hpp"
 #include "test_CellVoltage.hpp"
+#include "test_PowerManagementTemperature.hpp"
 #include "test_Identifier.hpp"
 
 extern "C"
@@ -51,6 +52,14 @@ extern "C"
             // #include "test_CellVoltage.hpp"
             RUN_TEST(TestingCellVoltageIdentifierSucceeds);
             RUN_TEST(TestingCellVoltageSucceeds);
+            
+            // #include "test_PowerManagementTemperature.hpp"
+            RUN_TEST(TestingPowerManagementTemperatureIdentifierSucceeds);
+            RUN_TEST(TestingPowerManagementTemperatureWithInvalidMaximumThrows);
+            RUN_TEST(TestingPowerManagementTemperatureReturnsZero);
+            RUN_TEST(TestingPowerManagementTemperatureReturns100);
+            RUN_TEST(TestingPowerManagementTemperatureReturnsMinus1);
+            RUN_TEST(TestingPowerManagementTemperatureReturnsMinus40);
             
             // #include "test_Identifier.hpp"
             RUN_TEST(ValdiatingNumberSucceeds);
