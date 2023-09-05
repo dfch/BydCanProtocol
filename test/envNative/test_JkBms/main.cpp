@@ -9,6 +9,8 @@
 #include "test_CellVoltage.hpp"
 #include "test_PowerManagementTemperature.hpp"
 #include "test_Identifier.hpp"
+#include "test_CurrentData.hpp"
+#include "test_RemainingBatteryCapacity.hpp"
 
 extern "C"
 {
@@ -67,6 +69,21 @@ extern "C"
             RUN_TEST(ValidatingIdentifierSucceeds);
             RUN_TEST(ValidatingIdentifierFails);
             
+            // #include "test_CurrentData.hpp"
+            RUN_TEST(TestingCurrentDataIdentifierSucceeds);
+            RUN_TEST(TestingCurrentDataReturnsPlus5);
+            RUN_TEST(TestingCurrentDataReturnsPlus100Dot53);
+            RUN_TEST(TestingCurrentDataReturnsZero);
+            RUN_TEST(TestingCurrentDataReturnsMinus10);
+            RUN_TEST(TestingCurrentDataReturnsMinus2Dot98);
+            
+            // #include "test_RemainingBatteryCapacity.hpp"
+            RUN_TEST(TestingRemainingBatteryCapacityIdentifierSucceeds);
+            RUN_TEST(TestingRemainingBatteryCapacityReturnsZero);
+            RUN_TEST(RemainingBatteryCapacityReturns32);
+            RUN_TEST(RemainingBatteryCapacityReturns100);
+            RUN_TEST(RemainingBatteryCapacityThrows);
+
             return UNITY_END();
         }
 

@@ -11,6 +11,6 @@ namespace Units
     /// @brief Represents a percentage.
     class Percent : public Unit
     {
-        // N/A
+        using Unit::Unit;
     };
 }

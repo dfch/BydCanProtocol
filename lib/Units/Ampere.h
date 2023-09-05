@@ -11,6 +11,6 @@ namespace Units
     /// @brief Represents an Ampere.
     class Ampere : public Unit
     {
-        // N/A
+        using Unit::Unit;
     };
 }

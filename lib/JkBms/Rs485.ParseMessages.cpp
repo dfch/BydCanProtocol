@@ -9,7 +9,7 @@
 #include "Frame.h"
 #include "Identifiers/CellVoltage.h"
 #include "Identifiers/PowerManagementTemperature.h"
-
+#include "Identifiers/RemainingBatteryCapacity.h"
 
 namespace JkBms
 {
@@ -33,10 +33,40 @@ namespace JkBms
                         sizeof(Identifiers::CellVoltage::Length);
                     break;
                 }
-                case Id::PowerManagementTemperature:
+                
+                // Handling of structs with size 1 + Identifier.
+                case Id::RemainingBatteryCapacity:
                     messages[id] = unit;
+                    // We can use any struct with a size of 1 + Identifier byte here.
+                    index += sizeof(Identifiers::RemainingBatteryCapacity);
+                    break;
+
+                // Handling of structs with size 2 + Identifier.
+                case Id::PowerManagementTemperature:
+                case Id::InternalBatteryBoxTemperature:
+                case Id::BatteryTemperature:
+                case Id::BatteryVoltage:
+                case Id::CurrentData:
+                case Id::OverVoltageProtection:
+                case Id::UnderVoltageProtection:
+                case Id::CellOverVoltageProtection:
+                case Id::CellOverVoltageRecovery:
+                case Id::CellUnderVoltageProtection:
+                case Id::CellUnderVoltageRecovery:
+                case Id::CellVoltageDifferenceProtection:
+                case Id::BalanceStartVoltage:
+                case Id::MaximumChargingVoltage:
+                case Id::MinimumDischargeVoltage:
+                case Id::BatteryLowVoltageShutdown:
+                case Id::BatteryLowVoltageRecovery:
+                    messages[id] = unit;
+                    // We can use any struct with a size of 2 + Identifier bytes here.
                     index += sizeof(Identifiers::PowerManagementTemperature);
                     break;
+
+                // Handling of structs with size 4 + Identifier.
+                // TODO
+
                 default:
                     frame = ValidationResult::InvalidIdentifier;
                     return;

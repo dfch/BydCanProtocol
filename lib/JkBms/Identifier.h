@@ -70,8 +70,8 @@ namespace JkBms
                 Id::SystemRestart,
                 Id::SystemReset,
                 Id::RemoteUpgrade,
-                Id::BatterLowVoltageShutdown,
-                Id::BatterLowVoltageRecovery,
+                Id::BatteryLowVoltageShutdown,
+                Id::BatteryLowVoltageRecovery,
                 Id::ProtocolVersion,
             };
 

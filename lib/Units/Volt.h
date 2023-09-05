@@ -11,6 +11,6 @@ namespace Units
     /// @brief Represents a Volt.
     class Volt : public Unit
     {
-        // N/A
+        using Unit::Unit;
     };
 }

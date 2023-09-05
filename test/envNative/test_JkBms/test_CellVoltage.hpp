@@ -64,7 +64,7 @@ namespace test::envNative::test_JkBms
         TEST_ASSERT_EQUAL_UINT8(4, c03.Number.Value);
         TEST_ASSERT_EQUAL(3820, c03.MilliVolt.ToLittleEndian());
 
-        auto result = sut->GetAverageVoltageMilliVolt();
+        auto result = sut->GetAverageVoltage().Value.ScaleTo(Scale::Milli);
         TEST_ASSERT_EQUAL_UINT16((3821 + 3834 + 3831 + 3820) / 4, result);
     }
 }

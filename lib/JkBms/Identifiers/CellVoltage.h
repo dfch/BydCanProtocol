@@ -6,10 +6,12 @@
 
 #include <cstdint>
 #include <cstddef>
+#include <map>
 
 #include <Contract.h>
 #include <Byte.h>
 #include <Word.h>
+#include <Volt.h>
 
 #include "Identifier.h"
 
@@ -17,6 +19,7 @@ namespace JkBms::Identifiers
 {
     using namespace JkBms;
     using namespace Endian;
+    using namespace Units;
 
     #pragma pack(push, 1)
     /// @brief Battery voltage information. Each cell is represented by a CellInfo.
@@ -45,18 +48,37 @@ namespace JkBms::Identifiers
             return Length / sizeof(tagCellInfo); 
         }
 
-        /// @brief Returns the average voltage of all cells in milli volt.
-        const uint16_t GetAverageVoltageMilliVolt() const noexcept
+        std::map<uint8_t, Volt> GetCellInfos() const noexcept
         {
-            uint16_t result = 0;
+            std::map<uint8_t, Volt> result;
+
+            auto count = CellCount();
+            for(auto c = 0; c < count; ++c)
+            {
+                tagCellInfo cellInfo = CellInfos[c];
+                
+                result.emplace(cellInfo.Number.Value, Volt(cellInfo.MilliVolt.ToLittleEndian(), Scale::Milli));
+            }
+
+            return result;
+        }
+
+        /// @brief Returns the average voltage of all cells
+        /// @return The average voltage of all cells.
+        Volt GetAverageVoltage() const noexcept
+        {
+            auto sumMilliVolt {0};
             auto count = CellCount();
 
             for(auto c = 0; c < count; ++c)
             {
-                result += CellInfos[c].MilliVolt.ToLittleEndian();
+                sumMilliVolt += CellInfos[c].MilliVolt.ToLittleEndian();
             }
 
-            return result / count;
+            auto averageMilliVolt = (float) sumMilliVolt / count;
+            Volt result(averageMilliVolt, Scale::Milli);
+
+            return result;
         }
     };
     #pragma pack(pop)

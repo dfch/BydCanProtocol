@@ -39,7 +39,5 @@ namespace Temperature
             /// @param value The value of the temperature.
             /// @return A reference to this instance.
             virtual TemperatureBase& SetValue(float value);
-
     };
-
 }
