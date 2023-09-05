@@ -11,6 +11,7 @@
 #include "test_Identifier.hpp"
 #include "test_CurrentData.hpp"
 #include "test_RemainingBatteryCapacity.hpp"
+#include "test_TotalBatteryCycleCapacity.hpp"
 
 extern "C"
 {
@@ -83,6 +84,11 @@ extern "C"
             RUN_TEST(RemainingBatteryCapacityReturns32);
             RUN_TEST(RemainingBatteryCapacityReturns100);
             RUN_TEST(RemainingBatteryCapacityThrows);
+
+            // #include "test_TotalBatteryCycleCapacity.hpp"
+            RUN_TEST(TotalBatteryCycleCapacityIdentifierSucceeds);
+            RUN_TEST(TotalBatteryCycleCapacityReturnsZero);
+            RUN_TEST(SettingTotalBatteryCycleCapacityThrows);
 
             return UNITY_END();
         }

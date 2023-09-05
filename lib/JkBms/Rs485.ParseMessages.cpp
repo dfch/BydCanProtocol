@@ -10,6 +10,7 @@
 #include "Identifiers/CellVoltage.h"
 #include "Identifiers/PowerManagementTemperature.h"
 #include "Identifiers/RemainingBatteryCapacity.h"
+#include "Identifiers/TotalBatteryCycleCapacity.h"
 
 namespace JkBms
 {
@@ -65,7 +66,11 @@ namespace JkBms
                     break;
 
                 // Handling of structs with size 4 + Identifier.
-                // TODO
+                case Id::TotalBatteryCycleCapacity:
+                    messages[id] = unit;
+                    // We can use any struct with a size of 4 + Identifier bytes here.
+                    index += sizeof(Identifiers::TotalBatteryCycleCapacity);
+                    break;
 
                 default:
                     frame = ValidationResult::InvalidIdentifier;

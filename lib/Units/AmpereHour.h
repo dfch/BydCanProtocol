@@ -11,6 +11,6 @@ namespace Units
     /// @brief Represents an Ampere hour.
     class AmpereHour : public Unit
     {
-        // N/A
+        using Unit::Unit;
     };
 }

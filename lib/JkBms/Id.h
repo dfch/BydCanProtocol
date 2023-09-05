@@ -22,7 +22,7 @@ namespace JkBms
         RemainingBatteryCapacity = 0x85, // defined:1
         BatteryTemperatureSensorsCount = 0x86,
         BatteryCycleCount = 0x87,
-        TotalBatteryCycleCapacity = 0x89,
+        TotalBatteryCycleCapacity = 0x89, // defined:4
         TotalNumberOfBatterySeries = 0x8a,
         BatteryWarningInformation = 0x8b,
         BatteryStatusInformation = 0x8c,
