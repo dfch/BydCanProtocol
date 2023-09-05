@@ -58,12 +58,6 @@ namespace JkBms::Identifiers
 
             return result / count;
         }
-
-        /// @brief The functor to be used for processing this identifier.
-        // void operator()() const noexcept
-        // {
-        //     return;
-        // }
     };
     #pragma pack(pop)
 

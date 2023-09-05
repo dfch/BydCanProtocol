@@ -31,7 +31,7 @@ namespace JkBms
             /// @brief Pointer to the data that make up the JK-BMS RS485 frame.
             const unique_ptr<vector<uint8_t>> ptr;
 
-            /// @brief Representation of a JK-BMS RS485 frame.
+            /// @brief Representation of a raw frame.
             expected<Frame, ValidationResult> frame;
 
             /// @brief Parses the specified contents of a frame and updates the pointers in frame.
@@ -61,7 +61,7 @@ namespace JkBms
 
             const std::map<Id, Frame> Messages() const;
 
-            /// @brief Determines wether the frame is valid.
+            /// @brief Determines whether the frame is valid.
             /// @return True, if the frame is valid; false, otherwise.
             bool IsValid() const noexcept { return frame.has_value(); }
 

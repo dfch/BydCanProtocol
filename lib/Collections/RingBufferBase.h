@@ -47,7 +47,7 @@ namespace Collections
             /// @return Returns an item of type T; or NULL, if queue is empty.
             virtual std::optional<T> Dequeue() = 0;
 
-            /// @brief Determines wether the ring buffer is empty or not.
+            /// @brief Determines whether the ring buffer is empty or not.
             /// @return True, if empty; false, otherwise.
             bool IsEmpty()
             {

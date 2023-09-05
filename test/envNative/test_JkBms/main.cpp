@@ -62,9 +62,9 @@ extern "C"
             RUN_TEST(TestingPowerManagementTemperatureReturnsMinus40);
             
             // #include "test_Identifier.hpp"
-            RUN_TEST(ValdiatingNumberSucceeds);
-            RUN_TEST(ValdiatingIdentifierSucceeds);
-            RUN_TEST(ValdiatingIdentifierFails);
+            RUN_TEST(ValidatingNumberSucceeds);
+            RUN_TEST(ValidatingIdentifierSucceeds);
+            RUN_TEST(ValidatingIdentifierFails);
             
             return UNITY_END();
         }

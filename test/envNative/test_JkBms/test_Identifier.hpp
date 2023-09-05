@@ -12,7 +12,7 @@ namespace test::envNative::test_JkBms
 {
     using namespace JkBms;
     
-    void ValdiatingNumberSucceeds()
+    void ValidatingNumberSucceeds()
     {
         #pragma pack(push, 1)
         struct tagArbitraryStruct
@@ -33,7 +33,7 @@ namespace test::envNative::test_JkBms
         TEST_ASSERT_EQUAL_UINT8(0x42, sut->Number);
     }
 
-    void ValdiatingIdentifierSucceeds()
+    void ValidatingIdentifierSucceeds()
     {
         #pragma pack(push, 1)
         struct tagArbitraryStruct
@@ -57,7 +57,7 @@ namespace test::envNative::test_JkBms
         TEST_ASSERT_EQUAL(Id::CellVoltage, sut->Identifier.Value);
     }
 
-    void ValdiatingIdentifierFails()
+    void ValidatingIdentifierFails()
     {
         #pragma pack(push, 1)
         struct tagArbitraryStruct

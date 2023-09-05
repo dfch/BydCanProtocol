@@ -25,7 +25,7 @@ namespace JkBms::Identifiers
     struct tagPowerManagementTemperature
     {
         /// @brief BMS settings identifier.
-        JkBms::tagIdentifier Identifier;
+        JkBms::Identifier Identifier;
 
         /// @brief The encoded temperature.
         Word Value;

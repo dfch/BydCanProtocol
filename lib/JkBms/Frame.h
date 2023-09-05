@@ -29,7 +29,7 @@ namespace JkBms
         const Footer* Footer;
 
         /// @brief Calculates the checksum of the frame.
-        uint32_t CalculateChecksum() const noexcept
+        /// The complete (Header, Body, Footer) frame must be initialised prior ot calling this function.
         {
             Contract::Expects([this] 
             {
