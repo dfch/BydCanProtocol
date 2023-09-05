@@ -69,7 +69,8 @@
 			"stop_token": "cpp",
 			"thread": "cpp",
 			"optional": "cpp",
-			"future": "cpp"
+			"future": "cpp",
+			"source_location": "cpp"
 		}
 	}
 }
