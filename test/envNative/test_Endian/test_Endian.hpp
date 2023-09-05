@@ -17,4 +17,18 @@ namespace test::envNative::test_Endian
 
         TEST_ASSERT_TRUE(result);
     }
+
+    void ConvertingBackAndForthSucceeds()
+    {
+        uint16_t expected(0x1234);
+        Word sut(expected);
+
+        auto converted = sut.ToLittleEndian();
+
+        sut.Value = converted;
+
+        auto result = sut.ToLittleEndian();
+
+        TEST_ASSERT_EQUAL(expected, result);
+    }
 }

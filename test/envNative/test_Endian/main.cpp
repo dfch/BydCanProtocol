@@ -10,6 +10,16 @@ extern "C"
 {
     namespace test::envNative::test_Endian
     {
+        int runUnityTests()
+        {
+            UNITY_BEGIN();
+
+            RUN_TEST(IsLittleEndianSucceeds);
+            RUN_TEST(ConvertingBackAndForthSucceeds);
+
+            return UNITY_END();
+        }
+
         void setUp(void)
         {
             // N/A
@@ -18,15 +28,6 @@ extern "C"
         void tearDown(void)
         {
             // N/A
-        }
-
-        int runUnityTests()
-        {
-            UNITY_BEGIN();
-
-            RUN_TEST(IsLittleEndianSucceeds);
-
-            return UNITY_END();
         }
 
         void app_main() 
