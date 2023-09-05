@@ -8,6 +8,7 @@
 #include <cstddef>
 
 #include <Word.h>
+#include "ValidationResult.h"
 #include "StartOfFrame.h"
 #include "BmsTerminalNumber.h"
 #include "CommandWord.h"
@@ -46,6 +47,35 @@ namespace JkBms
             {
                 return 0;
             }
+        }
+
+        /// @brief Validates the header and returns a ValidationResult.
+        /// @return Success, if the header validated without errors. Otherwise, errors have been detected.
+        ValidationResult GetValidationResult() const noexcept
+        {
+            if(!StartOfFrame.IsValid()) return ValidationResult::InvalidStartOfFrame;
+
+            if(CommandWord != CommandWord::Activate &&
+                CommandWord != CommandWord::Write && 
+                CommandWord != CommandWord::Read && 
+                CommandWord != CommandWord::Password && 
+                CommandWord != CommandWord::ReadAll) return ValidationResult::InvalidCommandWord;
+            
+            if(FrameSource != FrameSource::Bms && 
+                FrameSource != FrameSource::Bluetooth && 
+                FrameSource != FrameSource::Gps && 
+                FrameSource != FrameSource::Terminal) return ValidationResult::InvalidFrameSource;
+            
+            if(TransmissionType != TransmissionType::RequestFrame && 
+                TransmissionType != TransmissionType::ResponseFrame && 
+                TransmissionType != TransmissionType::ReportFrame) return ValidationResult::InvalidTransmissionType;
+        }
+
+        /// @brief Determines whether the header is valid. 
+        /// @return True, if the header is valid; false, otherwise.
+        bool IsValid() const noexcept
+        {
+            return ValidationResult::Success == GetValidationResult();
         }
     };
     #pragma pack(pop)

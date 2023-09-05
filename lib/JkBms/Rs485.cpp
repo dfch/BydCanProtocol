@@ -10,15 +10,13 @@
 
 #include "Frame.h"
 
-using namespace JkBms;
-
 namespace JkBms
 {
     using std::unique_ptr;
     using std::vector;
     using std::uint8_t;
 
-    Rs485::Rs485(vector<uint8_t>& data)
+    Rs485::Rs485(vector<uint8_t> &data)
         : Rs485(std::make_unique<std::vector<uint8_t>>(std::move(data))) { }
 
     Rs485::Rs485(unique_ptr<vector<uint8_t>> data)
@@ -36,15 +34,19 @@ namespace JkBms
         return result;
     }
 
-    const std::map<Id, Frame> Rs485::Messages() const
+    const Frame Rs485::GetFrame() const
     {
-        std::map<Id, Frame> result;
+        Contract::Expects([this] { return this->frame.has_value(); }, "Invalid frame.");
 
-        if(!frame.has_value()) return result;
+        if(!frame.has_value()) return {};
+        return *frame;
+    }
 
-        result[frame.value().Body->Identifier.Value] = *frame;
+    const std::map<Id, InformationUnit *>& Rs485::GetMessages() const
+    {
+        Contract::Expects([this] { return this->frame.has_value(); }, "Invalid frame.");
 
-        return std::move(result);
+        return messages;
     }
 
     void Rs485::ParseData() noexcept
@@ -72,7 +74,7 @@ namespace JkBms
         // Check if length specified in header matches the frame size.
         if(result.Header->GetFrameLength() != frameSize) 
         {
-            printf("Expected: %d (incl STX). Actual %d\n", result.Header->GetFrameLength(), frameSize);
+            printf("Expected: %d (incl STX). Actual %d.\n", result.Header->GetFrameLength(), frameSize);
             frame = ValidationResult::InvalidLength;
             return;
         }
@@ -103,7 +105,12 @@ namespace JkBms
             return;
         }
 
+        // Extract all messages from Body into message.
+        ParseMessages(const_cast<uint8_t&>(reinterpret_cast<const uint8_t&>(*result.Body)), bodySize);
+
+        // Update contents for GetFrame(), GetMessages(), GetValidationResult().
         frame = result;
+        
         return;
     }
 }

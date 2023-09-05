@@ -14,9 +14,14 @@ namespace JkBms
         NotParsed,
         FrameTooShort,
         InvalidHeader,
+        InvalidStartOfFrame,
         InvalidLength,
         InvalidIdentifier,
+        InvalidMessages,
         InvalidEndCode,
         InvalidChecksum,
+        InvalidCommandWord,
+        InvalidFrameSource,
+        InvalidTransmissionType,
     };
 }

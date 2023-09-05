@@ -47,7 +47,8 @@ extern "C"
             RUN_TEST(IsValidWithInvalidChecksumFails);
             RUN_TEST(IsValidWithValidChecksumSucceeds);
             RUN_TEST(IsValidWithInvalidIdentifierFails);
-            RUN_TEST(GettingFramesSucceeds);
+            RUN_TEST(GettingMessagesSucceeds);
+            RUN_TEST(GettingMultipleMessagesSucceeds);
 
             // #include "test_CellVoltage.hpp"
             RUN_TEST(TestingCellVoltageIdentifierSucceeds);
@@ -60,8 +61,8 @@ extern "C"
             RUN_TEST(TestingPowerManagementTemperatureReturns100);
             RUN_TEST(TestingPowerManagementTemperatureReturnsMinus1);
             RUN_TEST(TestingPowerManagementTemperatureReturnsMinus40);
-            
-            // #include "test_Identifier.hpp"
+ 
+             // #include "test_Identifier.hpp"
             RUN_TEST(ValidatingNumberSucceeds);
             RUN_TEST(ValidatingIdentifierSucceeds);
             RUN_TEST(ValidatingIdentifierFails);

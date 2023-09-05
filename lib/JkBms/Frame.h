@@ -28,12 +28,15 @@ namespace JkBms
         const InformationUnit* Body;
         const Footer* Footer;
 
-        /// @brief Calculates the checksum of the frame.
+        /// @brief Calculates the checksum of the frame. 
         /// The complete (Header, Body, Footer) frame must be initialised prior ot calling this function.
+        uint32_t CalculateChecksum() const
         {
-            Contract::Expects([this] 
+            Contract::Expects([this]
             {
-                return nullptr != this->Header && nullptr != this->Footer;
+                return nullptr != this->Header && 
+                    nullptr != this->Body && 
+                    nullptr != this->Footer; 
             }, NAMEOF(CalculateChecksum));
 
             uint32_t result { 0 };
@@ -50,9 +53,9 @@ namespace JkBms
 
         /// @brief Determines whether the checksum of the frame is valid or not.
         /// @return Return true, if the checksum is valid; false, otherwise.
-        bool IsValidChecksum() const noexcept
+        bool IsValidChecksum() const
         {
-            if(nullptr == Header || nullptr == Body || nullptr == Footer ) return false;
+            Contract::Expects([this] { return nullptr != this->Footer; }, NAMEOF(IsValidChecksum));
 
             auto calc = CalculateChecksum();
             auto stor = this->Footer->Checksum.ToLittleEndian();
