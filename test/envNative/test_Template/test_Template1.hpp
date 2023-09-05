@@ -4,8 +4,6 @@
 
 #include <unity.h>
 
-#include <Rs485.h>
-
 namespace test::envNative::test_Template
 {
     // using namespace Template;
