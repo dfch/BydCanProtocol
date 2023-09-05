@@ -30,10 +30,10 @@ namespace JkBms
         UnderVoltageProtection = 0x8f, // defined:2
         CellOverVoltageProtection = 0x90, // defined:2
         CellOverVoltageRecovery = 0x91, // defined:2
-        CellOverVoltageProtectionDelay = 0x92,
+        CellOverVoltageProtectionDelay = 0x92, // defined:2
         CellUnderVoltageProtection = 0x93, // defined:2
         CellUnderVoltageRecovery = 0x94, // defined:2
-        CellUnderVoltageProtectionDelay = 0x95,
+        CellUnderVoltageProtectionDelay = 0x95, // defined:2
         CellVoltageDifferenceProtection = 0x96, // defined:2
         DischargeOverCurrentProtection = 0x97,
         DischargeOverCurrentDelay = 0x98,

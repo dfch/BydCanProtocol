@@ -60,6 +60,8 @@ namespace JkBms
                 case Id::MinimumDischargeVoltage:
                 case Id::BatteryLowVoltageShutdown:
                 case Id::BatteryLowVoltageRecovery:
+                case Id::CellOverVoltageProtectionDelay:
+                case Id::CellUnderVoltageProtectionDelay:
                     messages[id] = unit;
                     // We can use any struct with a size of 2 + Identifier bytes here.
                     index += sizeof(Identifiers::PowerManagementTemperature);

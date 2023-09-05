@@ -56,6 +56,4 @@ namespace JkBms::Identifiers
     /// @brief Represents a voltage of the BMS.
     /// The voltage is represented as milli volts.
     using CurrentData = tagCurrentData;
-
-    
 }
