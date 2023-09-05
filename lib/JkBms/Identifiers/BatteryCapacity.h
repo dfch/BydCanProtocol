@@ -17,8 +17,8 @@ namespace JkBms::Identifiers
     using namespace Units;
 
     #pragma pack(push, 1)
-    /// @brief Represents the Total Battery Cycle Capacity in AmpereHour of the BMS.
-    struct tagTotalBatteryCycleCapacity
+    /// @brief Represents the Battery Capacity in AmpereHour of the BMS.
+    struct tagBatteryCapacity
     {
         /// @brief BMS settings identifier.
         JkBms::Identifier Identifier;
@@ -47,6 +47,6 @@ namespace JkBms::Identifiers
     };
     #pragma pack(pop)
 
-    /// @brief Represents the Total Battery Cycle Capacity in AmpereHour of the BMS.
-    using TotalBatteryCycleCapacity = tagTotalBatteryCycleCapacity;
+    /// @brief Represents the Battery Capacity in AmpereHour of the BMS.
+    using BatteryCapacity = tagBatteryCapacity;
 }

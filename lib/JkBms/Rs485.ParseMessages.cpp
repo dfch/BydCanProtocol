@@ -71,6 +71,7 @@ namespace JkBms
 
                 // Handling of structs with size 4 + Identifier.
                 case Id::TotalBatteryCycleCapacity:
+                case Id::BatteryCapacity:
                     messages[id] = unit;
                     // We can use any struct with a size of 4 + Identifier bytes here.
                     index += sizeof(Identifiers::TotalBatteryCycleCapacity);

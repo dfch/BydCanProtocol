@@ -54,7 +54,8 @@ namespace JkBms
         BalanceVoltage = 0xa7,
         TemperatureSensorCalibration = 0xa8,
         TotalCapacityCalibration = 0xa9,
-        TemperatureProtection = 0xaa,
+        // TemperatureProtection = 0xaa,
+        BatteryCapacity = 0xaa, // defined:4
         TemperatureProtectionRecovery = 0xab,
         ManufacturerId = 0xBA,
         SystemRestart = 0xBB,
