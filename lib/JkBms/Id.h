@@ -36,9 +36,9 @@ namespace JkBms
         CellUnderVoltageProtectionDelay = 0x95, // defined:2
         CellVoltageDifferenceProtection = 0x96, // defined:2
         DischargeOverCurrentProtection = 0x97,
-        DischargeOverCurrentDelay = 0x98,
+        DischargeOverCurrentDelay = 0x98, // defined:2
         ChargeOverCurrentProtection = 0x99,
-        ChargeOverCurrentDelay = 0x9a,
+        ChargeOverCurrentDelay = 0x9a, // defined:2
         BalanceStartVoltage = 0x9b, // defined:2
         BalanceStartVoltageDifference = 0x9c, // defined:2
         ActiveBalanceSwitch = 0x9d,
