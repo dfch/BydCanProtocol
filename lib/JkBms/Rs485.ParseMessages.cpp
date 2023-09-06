@@ -37,6 +37,8 @@ namespace JkBms
                 
                 // Handling of structs with size 1 + Identifier.
                 case Id::RemainingBatteryCapacity:
+                case Id::BatteryTemperatureSensorsCount:
+                case Id::ActiveBalanceSwitch:
                     messages[id] = unit;
                     // We can use any struct with a size of 1 + Identifier byte here.
                     index += sizeof(Identifiers::RemainingBatteryCapacity);
@@ -48,22 +50,26 @@ namespace JkBms
                 case Id::BatteryTemperature:
                 case Id::BatteryVoltage:
                 case Id::BatteryCurrent:
+                case Id::BatteryCycleCount:
+                case Id::BatteryStringCount:
                 case Id::OverVoltageProtection:
                 case Id::UnderVoltageProtection:
                 case Id::CellOverVoltageProtection:
                 case Id::CellOverVoltageRecovery:
+                case Id::CellOverVoltageProtectionDelay:
                 case Id::CellUnderVoltageProtection:
                 case Id::CellUnderVoltageRecovery:
+                case Id::CellUnderVoltageProtectionDelay:
                 case Id::CellVoltageDifferenceProtection:
+                case Id::DischargeOverCurrentProtection:
+                case Id::DischargeOverCurrentDelay:
+                case Id::ChargeOverCurrentProtection:
+                case Id::ChargeOverCurrentDelay:
                 case Id::BalanceStartVoltage:
                 case Id::MaximumChargingVoltage:
                 case Id::MinimumDischargeVoltage:
                 case Id::BatteryLowVoltageShutdown:
                 case Id::BatteryLowVoltageRecovery:
-                case Id::CellOverVoltageProtectionDelay:
-                case Id::CellUnderVoltageProtectionDelay:
-                case Id::DischargeOverCurrentDelay:
-                case Id::ChargeOverCurrentDelay:
                     messages[id] = unit;
                     // We can use any struct with a size of 2 + Identifier bytes here.
                     index += sizeof(Identifiers::PowerManagementTemperature);
