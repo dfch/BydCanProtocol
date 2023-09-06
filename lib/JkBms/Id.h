@@ -18,7 +18,7 @@ namespace JkBms
         InternalBatteryBoxTemperature = 0x81, // defined:2
         BatteryTemperature = 0x82, // defined:2
         BatteryVoltage = 0x83, // defined:2
-        CurrentData = 0x84, // defined:2
+        BatteryCurrent = 0x84, // defined:2
         RemainingBatteryCapacity = 0x85, // defined:1
         BatteryTemperatureSensorsCount = 0x86,
         BatteryCycleCount = 0x87,

@@ -4,7 +4,7 @@
 
 #include <unity.h>
 
-#include <Identifiers/CurrentData.h>
+#include <Identifiers/BatteryCurrent.h>
 
 namespace test::envNative::test_JkBms
 {
@@ -19,11 +19,11 @@ namespace test::envNative::test_JkBms
             0x00, 0x00
         };
 
-        auto sut = reinterpret_cast<CurrentData*>(data.data());
+        auto sut = reinterpret_cast<BatteryCurrent*>(data.data());
 
         auto result = sut->Identifier.Value;
 
-        TEST_ASSERT_EQUAL_UINT8(Id::CurrentData, result);
+        TEST_ASSERT_EQUAL_UINT8(Id::BatteryCurrent, result);
     }
 
     void TestingCurrentDataReturnsPlus5(void)
@@ -34,7 +34,7 @@ namespace test::envNative::test_JkBms
             0x25, 0x1C
         };
 
-        auto sut = reinterpret_cast<CurrentData*>(data.data());
+        auto sut = reinterpret_cast<BatteryCurrent*>(data.data());
 
         auto result = sut->ToAmpere();
 
@@ -49,7 +49,7 @@ namespace test::envNative::test_JkBms
             0xFF, 0xCB
         };
 
-        auto sut = reinterpret_cast<CurrentData*>(data.data());
+        auto sut = reinterpret_cast<BatteryCurrent*>(data.data());
 
         auto result = sut->ToAmpere();
 
@@ -64,7 +64,7 @@ namespace test::envNative::test_JkBms
             0x27, 0x10
         };
 
-        auto sut = reinterpret_cast<CurrentData*>(data.data());
+        auto sut = reinterpret_cast<BatteryCurrent*>(data.data());
 
         auto result = sut->ToAmpere();
 
@@ -79,7 +79,7 @@ namespace test::envNative::test_JkBms
             0x2A, 0xF8
         };
 
-        auto sut = reinterpret_cast<CurrentData*>(data.data());
+        auto sut = reinterpret_cast<BatteryCurrent*>(data.data());
 
         auto result = sut->ToAmpere();
 
@@ -94,7 +94,7 @@ namespace test::envNative::test_JkBms
             0x28, 0x3A
         };
 
-        auto sut = reinterpret_cast<CurrentData*>(data.data());
+        auto sut = reinterpret_cast<BatteryCurrent*>(data.data());
 
         auto result = sut->ToAmpere();
 

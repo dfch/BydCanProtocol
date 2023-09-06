@@ -19,7 +19,7 @@ namespace JkBms::Identifiers
     /// @brief Represents the current of the BMS.
     /// The curent is represented as centi Ampere.
     /// Negative values indicate BMS is discharging. Positive values indicates BMS is charging.
-    struct tagCurrentData
+    struct tagBatteryCurrent
     {
         /// @brief BMS settings identifier.
         JkBms::Identifier Identifier;
@@ -55,5 +55,5 @@ namespace JkBms::Identifiers
 
     /// @brief Represents a voltage of the BMS.
     /// The voltage is represented as milli volts.
-    using CurrentData = tagCurrentData;
+    using BatteryCurrent = tagBatteryCurrent;
 }

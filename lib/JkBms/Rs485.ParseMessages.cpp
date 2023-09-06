@@ -47,7 +47,7 @@ namespace JkBms
                 case Id::InternalBatteryBoxTemperature:
                 case Id::BatteryTemperature:
                 case Id::BatteryVoltage:
-                case Id::CurrentData:
+                case Id::BatteryCurrent:
                 case Id::OverVoltageProtection:
                 case Id::UnderVoltageProtection:
                 case Id::CellOverVoltageProtection:

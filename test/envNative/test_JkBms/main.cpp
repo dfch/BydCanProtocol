@@ -9,7 +9,7 @@
 #include "test_CellVoltage.hpp"
 #include "test_PowerManagementTemperature.hpp"
 #include "test_Identifier.hpp"
-#include "test_CurrentData.hpp"
+#include "test_BatteryCurrent.hpp"
 #include "test_RemainingBatteryCapacity.hpp"
 #include "test_TotalBatteryCycleCapacity.hpp"
 
@@ -70,7 +70,7 @@ extern "C"
             RUN_TEST(ValidatingIdentifierSucceeds);
             RUN_TEST(ValidatingIdentifierFails);
             
-            // #include "test_CurrentData.hpp"
+            // #include "test_BatteryCurrent.hpp"
             RUN_TEST(TestingCurrentDataIdentifierSucceeds);
             RUN_TEST(TestingCurrentDataReturnsPlus5);
             RUN_TEST(TestingCurrentDataReturnsPlus100Dot53);

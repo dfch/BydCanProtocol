@@ -28,7 +28,7 @@ namespace JkBms
                 Id::InternalBatteryBoxTemperature,
                 Id::BatteryTemperature,
                 Id::BatteryVoltage,
-                Id::CurrentData,
+                Id::BatteryCurrent,
                 Id::RemainingBatteryCapacity,
                 Id::BatteryTemperatureSensorsCount,
                 Id::BatteryCycleCount,
