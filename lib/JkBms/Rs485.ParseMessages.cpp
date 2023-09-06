@@ -44,7 +44,7 @@ namespace JkBms
 
                 // Handling of structs with size 2 + Identifier.
                 case Id::PowerManagementTemperature:
-                case Id::InternalBatteryBoxTemperature:
+                case Id::BatteryBoxTemperature:
                 case Id::BatteryTemperature:
                 case Id::BatteryVoltage:
                 case Id::BatteryCurrent:

@@ -15,7 +15,7 @@ namespace JkBms
         ReadAll = 0x00, // Only allowed in combination with CommandWord::ReadAll.
         CellVoltage = 0x79, // defined:N
         PowerManagementTemperature = 0x80, // defined:2
-        InternalBatteryBoxTemperature = 0x81, // defined:2
+        BatteryBoxTemperature = 0x81, // defined:2
         BatteryTemperature = 0x82, // defined:2
         BatteryVoltage = 0x83, // defined:2
         BatteryCurrent = 0x84, // defined:2

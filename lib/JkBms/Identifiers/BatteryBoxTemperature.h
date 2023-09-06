@@ -15,7 +15,7 @@ namespace JkBms::Identifiers
     /// The range is represented by integers from 0 to 140. 
     /// Values above 100 represent negative temperatures; values below 100 represent positive temperaures. 
     /// For example, a value of 101 corresponds to -1°C.
-    struct tagInternalBatteryBoxTemperature : public TemperatureBase
+    struct tagBatteryBoxTemperature : public TemperatureBase
     {
         // Intentionally left blank.
     };
@@ -26,5 +26,5 @@ namespace JkBms::Identifiers
     /// The range is represented by integers from 0 to 140. 
     /// Values above 100 represent negative temperatures; values below 100 represent positive temperaures. 
     /// For example, a value of 101 corresponds to -1°C.
-    using InternalBatteryBoxTemperature = tagInternalBatteryBoxTemperature;
+    using BatteryBoxTemperature = tagInternalBatteryBoxTemperature;
 }

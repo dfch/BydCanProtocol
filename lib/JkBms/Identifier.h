@@ -25,7 +25,7 @@ namespace JkBms
                 Id::ReadAll,
                 Id::CellVoltage,
                 Id::PowerManagementTemperature,
-                Id::InternalBatteryBoxTemperature,
+                Id::BatteryBoxTemperature,
                 Id::BatteryTemperature,
                 Id::BatteryVoltage,
                 Id::BatteryCurrent,
