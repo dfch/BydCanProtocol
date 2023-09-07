@@ -36,5 +36,5 @@ namespace JkBms::Identifiers
     #pragma pack(pop)
 
     /// @brief Represents the Active Balance Switch (0,1) of the BMS.
-    using ActiveBalanceSwitch = tagActiveBalanceSwitch;
+    using BalancerActiveFlag = tagActiveBalanceSwitch;
 }

@@ -12,7 +12,7 @@
 #include "Watt.h"
 #include "WattHour.h"
 
-namespace test::envNative::test_Temperature
+namespace test::envNative::test_Units
 {
     void InitialisingAndScalingUnitSucceeds()
     {

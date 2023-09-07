@@ -4,16 +4,11 @@
 
 #pragma once
 
-#include "CentiVoltVoltBase.h"
+#include "VoltBase.h"
+#include "Scale.h"
 
 namespace JkBms::Identifiers
 {
     /// @brief Represents the Over Voltage Protection of the BMS.
-    struct tagOverVoltageProtection : CentiVoltBase
-    {
-        // Intentionally left blank.
-    }
-
-    /// @brief Represents the Over Voltage Protection of the BMS.
-    using OverVoltageProtection = tagOverVoltageProtection;
+    using OverVoltageProtection = tagVoltBase<10, 15'000, Scale::Centi>;
 }

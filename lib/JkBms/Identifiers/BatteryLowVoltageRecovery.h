@@ -4,16 +4,11 @@
 
 #pragma once
 
-#include "CentiVoltVoltBase.h"
+#include "VoltBase.h"
+#include "Scale.h"
 
 namespace JkBms::Identifiers
 {
     /// @brief Represents the Battery Low Voltage Recovery of the BMS.
-    struct tagBatteryLowVoltageRecovery : CentiVoltBase
-    {
-        // Intentionally left blank.
-    }
-
-    /// @brief Represents the Battery Low Voltage Recovery of the BMS.
-    using BatteryLowVoltageRecovery = tagBatteryLowVoltageRecovery;
+    using BatteryLowVoltageRecovery = VoltBase<0, 4500, Scale::Milli>;
 }

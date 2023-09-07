@@ -4,13 +4,26 @@
 
 #pragma once
 
-#include "Unit.h"
+#include "ValueT.h"
 
 namespace Units
 {
-    /// @brief Represents a second.
-    class Second : public Unit
-    {
-        using Unit::Unit;
-    };
+    using namespace std;
+
+    using ToSeconds = DefaultRatio;
+    using ToMinutes = ratio_multiply<ratio<60, 1>, ToSeconds>;
+    using ToHours = ratio_multiply<ratio<60, 1>, ToMinutes>;
+    using ToDays = ratio_multiply<ratio<24, 1>, ToHours>;
+
+    using FromSeconds = DefaultRatio;
+    using FromMinutes = ratio_multiply<ratio<60, 1>, ToSeconds>;
+    using FromHours = ratio_multiply<ratio<60, 1>, ToMinutes>;
+    using FromDays = ratio_multiply<ratio<24, 1>, ToHours>;
+
+    using MicroSecond = ValueT<float, micro>;
+    using MilliSecond = ValueT<float, milli>;
+    using Second = ValueT<float, DefaultRatio>;
+    using Minute = ValueT<float, FromMinutes>;
+    using Hour = ValueT<float, FromHours>;
+    using Day = ValueT<float, FromDays>;
 }

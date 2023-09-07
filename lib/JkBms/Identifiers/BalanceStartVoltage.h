@@ -4,16 +4,10 @@
 
 #pragma once
 
-#include "MilliVoltBase.h"
+#include "VoltBase.h"
 
 namespace JkBms::Identifiers
 {
     /// @brief Represents the Balance Start Voltage of the BMS.
-    struct tagBalanceStartVoltage : MilliVoltBase
-    {
-        // Intentionally left blank.
-    }
-
-    /// @brief Represents the Balance Start Voltage of the BMS.
-    using BalanceStartVoltage = tagBalanceStartVoltage;
+    using BalanceStartVoltage = tagVoltBase<2000, 4500, Scale::Milli>;
 }

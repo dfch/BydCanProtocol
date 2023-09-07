@@ -4,16 +4,11 @@
 
 #pragma once
 
-#include "MilliVoltBase.h"
+#include <Scale.h>
+#include "VoltBase.h"
 
 namespace JkBms::Identifiers
 {
     /// @brief Represents the Maximum Charging Voltage of the BMS.
-    struct tagMaximumChargingVoltage : MilliVoltBase
-    {
-        // Intentionally left blank.
-    }
-
-    /// @brief Represents the Maximum Charging Voltage of the BMS.
-    using MaximumChargingVoltage = tagMaximumChargingVoltage;
+    using ChargeLowTemperatureProtection = tagVoltBase<0, 150'000, Scale::Milli>;
 }

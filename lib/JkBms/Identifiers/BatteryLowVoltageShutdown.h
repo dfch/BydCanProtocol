@@ -4,16 +4,11 @@
 
 #pragma once
 
-#include "CentiVoltVoltBase.h"
+#include "VoltBase.h"
+#include "Scale.h"
 
 namespace JkBms::Identifiers
 {
     /// @brief Represents the Battery Low Voltage Shutdown of the BMS.
-    struct tagBatteryLowVoltageShutdown : CentiVoltBase
-    {
-        // Intentionally left blank.
-    }
-
-    /// @brief Represents the Battery Low Voltage Shutdown of the BMS.
-    using BatteryLowVoltageShutdown = tagBatteryLowVoltageShutdown;
+    using BatteryLowVoltageShutdown = VoltBase<0, 4500, Scale::Milli>;
 }

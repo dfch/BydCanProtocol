@@ -48,5 +48,5 @@ namespace JkBms::Identifiers
     #pragma pack(pop)
 
     /// @brief Represents the Total Battery Cycle Capacity in AmpereHour of the BMS.
-    using TotalBatteryCycleCapacity = tagTotalBatteryCycleCapacity;
+    using BatteryChargeTotal = tagTotalBatteryCycleCapacity;
 }

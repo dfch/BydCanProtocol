@@ -298,7 +298,7 @@ namespace test::envNative::test_JkBms
             0x03, 0x0E, 0xF7, // 3831 * 0.001 = 3.831V
             0x04, 0x0E, 0xEC, // 3820 * 0.001 = 3.820V
             // 2nd message
-            (uint8_t) Id::PowerManagementTemperature,
+            (uint8_t) Id::BmsTemperature,
             0x00, 0x64, // 100°C
             
             // Footer
@@ -315,6 +315,6 @@ namespace test::envNative::test_JkBms
 
         TEST_ASSERT_EQUAL(2, result.size());
         TEST_ASSERT_EQUAL(Id::CellVoltage, result.begin()->first);
-        TEST_ASSERT_EQUAL(Id::PowerManagementTemperature, result.rbegin()->first);
+        TEST_ASSERT_EQUAL(Id::BmsTemperature, result.rbegin()->first);
     }
 }

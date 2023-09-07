@@ -16,7 +16,7 @@ namespace JkBms::Identifiers
     using namespace Units;
 
     /// @brief State of Charge (SOC). Represents the remaining battery capacity in percent (0..100).
-    struct tagRemainingBatteryCapacity
+    struct tagBatteryChargeState
     {
         JkBms::Identifier Identifier;
         
@@ -32,5 +32,5 @@ namespace JkBms::Identifiers
     };
 
     /// @brief State of Charge (SOC). Represents the remaining battery capacity in percent (0..100).
-    using RemainingBatteryCapacity = tagRemainingBatteryCapacity;
+    using BatteryChargeState = tagBatteryChargeState;
 }

@@ -167,6 +167,13 @@ namespace Units
         return *this;
     }
 
+    Value& Value::SetValue(float value, Scale tag)
+    {
+        this->value = ScaleFrom(value, tag);
+
+        return *this;
+    }
+
     float Value::ScaleTo(Scale tag) const
     {
         return ScaleTo(tag, false);

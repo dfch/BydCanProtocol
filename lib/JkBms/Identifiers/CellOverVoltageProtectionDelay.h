@@ -28,19 +28,19 @@ namespace JkBms::Identifiers
 
         /// @brief Converts the underlying value to seconds. 
         /// @return The converted second.
-        Second ToSecond() const 
+        MicroSecond ToSecond() const 
         {
             auto value = Value.ToLittleEndian();
             Contract::Expects([s] { return 1 <= value && 60 >= value; });
 
-            Second result(value);
+            MicroSecond result(value);
 
             return result;
         }
 
         /// @brief Sets the underlying value.
         /// @param value The value in seconds to set.
-        void FromSecond(Second value)
+        void FromSecond(MicroSecond value)
         {
             auto s = value.Value.GetValue();
             Contract::Expects([s] { return 1 <= s && 60 >= s; });

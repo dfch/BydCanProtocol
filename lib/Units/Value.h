@@ -5,8 +5,11 @@
 #pragma once
 
 #include <cstdint>
+#include <ratio>
+#include <concepts>
 
 #include <Scale.h>
+#include <ValueT.h>
 
 namespace Units
 {
@@ -66,10 +69,37 @@ namespace Units
             /// @return A reference to this instance.
             Value& SetValue(float value);
 
+            /// @brief Sets the value of Value.
+            /// @param value The new value.
+            /// @param tag The tag representing the magnitude to scale.
+            /// @return A reference to this instance.
+            Value& SetValue(float value, Scale tag);
+
+            /// @brief Sets the value of Value.
+            /// @param value The new value.
+            /// @tparam TRatio The ratio representing the magnitude to scale.
+            /// @return A reference to this instance.
+            template<Ratio TRatio>
+            Value& SetValue(float value)
+            {
+                this->value = value * TRatio::den / TRatio::num;
+
+                return *this;
+            }
+
             /// @brief Scales Value to a given factor as specifed by tag.
             /// @param tag The tag representing the magnitude to scale.
             /// @return The scaled value.
             float ScaleTo(Scale tag) const;
+
+            /// @brief Scales Value to a given factor as specifed by tag.
+            /// @param TRatio The tag representing the magnitude to scale.
+            /// @return The scaled value.
+            template<Ratio TRatio>
+            float ScaleTo() const
+            {
+                return value * TRatio::num / TRatio::den;
+            }
 
             /// @brief Scales Value to a given factor as specifed by tag.
             /// @param tag The tag representing the factor to scale.

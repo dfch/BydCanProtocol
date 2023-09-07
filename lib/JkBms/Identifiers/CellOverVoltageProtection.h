@@ -4,16 +4,11 @@
 
 #pragma once
 
-#include "MilliVoltBase.h"
+#include "VoltBase.h"
+#include "Scale.h"
 
 namespace JkBms::Identifiers
 {
     /// @brief Represents the Cell Over Voltage Protection of the BMS.
-    struct tagCellOverVoltageProtection : MilliVoltBase
-    {
-        // Intentionally left blank.
-    }
-
-    /// @brief Represents the Cell Over Voltage Protection of the BMS.
-    using CellOverVoltageProtection = tagCellOverVoltageProtection;
+    using CellOverVoltageProtection = tagVoltBase<1000, 4500, Scale::Milli>;
 }

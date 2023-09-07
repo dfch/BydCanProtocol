@@ -4,16 +4,11 @@
 
 #pragma once
 
-#include "MilliVoltBase.h"
+#include <Scale.h>
+#include "VoltBase.h"
 
 namespace JkBms::Identifiers
 {
     /// @brief Represents the Minimum Discharge Voltage of the BMS.
-    struct tagMinimumDischargeVoltage : MilliVoltBase
-    {
-        // Intentionally left blank.
-    }
-
-    /// @brief Represents the Minimum Discharge Voltage of the BMS.
-    using MinimumDischargeVoltage = tagMinimumDischargeVoltage;
+    using ChargeLowTemperatureRecovery = tagVoltBase<0, 150'000, Scale::Milli>;
 }

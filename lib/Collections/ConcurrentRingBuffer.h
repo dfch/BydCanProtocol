@@ -22,6 +22,9 @@ namespace Collections
             std::mutex mutex;
 
         public:
+            using RingBuffer<T, TSize>::IsEmpty;
+            using RingBuffer<T, TSize>::Size;
+
             /// @brief Enqueues an item into the ring buffer.
             /// @param item The item of type T to enqueue.
             /// @return Returns true, if the item could be enqueued without overwriting the buffer; false, otherwise.
@@ -29,7 +32,9 @@ namespace Collections
             {
                 const std::scoped_lock<std::mutex> lock(mutex);
 
-                return RingBuffer<T, TSize>::Enqueue(value);
+                auto result = RingBuffer<T, TSize>::Enqueue(value);
+
+                return result;
             }
 
             /// @brief Dequeues an item from the ring buffer.

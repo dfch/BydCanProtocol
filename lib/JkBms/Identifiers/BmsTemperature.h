@@ -4,21 +4,15 @@
 
 #pragma once
 
-#include "TemperatureBase.h"
+#include "TemperatureBaseFunc.h"
+#include "TemperatureRangeM40To100C.h"
 
 namespace JkBms::Identifiers
 {
-    #pragma pack(push, 1)
     /// @brief Represents the temperature of the BMS (-40°C to 100°C).
     /// The temperature is represented via a mapping scheme that spans from -40°C to 100°C. 
     /// The range is represented by integers from 0 to 140. 
     /// Values above 100 represent negative temperatures; values below 100 represent positive temperaures. 
     /// For example, a value of 101 corresponds to -1°C.
-    struct tagPowerManagementTemperature : TemperatureBase
-    {
-        // Intentionally left blank.
-    };
-    #pragma pack(pop)
-
-    using PowerManagementTemperature = tagPowerManagementTemperature;
+    using BmsTemperature = tagTemperatureBaseFunc<TemperatureRangeM40To100C::Getter, TemperatureRangeM40To100C::Setter>;
 }

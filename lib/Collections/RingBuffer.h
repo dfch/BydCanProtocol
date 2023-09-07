@@ -17,14 +17,18 @@ namespace Collections
     template<typename T, size_t TSize>
     class RingBuffer : public RingBufferBase<T, TSize>
     {
-        using RingBufferBase<T, TSize>::Counter;
-        using RingBufferBase<T, TSize>::EnqueueIndex;
-        using RingBufferBase<T, TSize>::DequeueIndex;
-        using RingBufferBase<T, TSize>::Increment;
-        using RingBufferBase<T, TSize>::Data;
-        using RingBufferBase<T, TSize>::Empty;
+        protected:
+            using RingBufferBase<T, TSize>::Empty;
+            using RingBufferBase<T, TSize>::Increment;
+            using RingBufferBase<T, TSize>::Counter;
+            using RingBufferBase<T, TSize>::EnqueueIndex;
+            using RingBufferBase<T, TSize>::DequeueIndex;
+            using RingBufferBase<T, TSize>::Data;
 
         public:
+            using RingBufferBase<T, TSize>::IsEmpty;
+            using RingBufferBase<T, TSize>::Size;
+
             /// @brief Enqueues an item into the ring buffer.
             /// @param item The item of type T to enqueue.
             /// @return Returns true, if the item could be enqueued without overwriting the buffer; false, otherwise.

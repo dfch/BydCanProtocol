@@ -49,14 +49,14 @@ namespace Collections
 
             /// @brief Determines whether the ring buffer is empty or not.
             /// @return True, if empty; false, otherwise.
-            bool IsEmpty()
+            bool IsEmpty() const
             {
                 return Empty == Counter;
             }
 
             /// @brief Returns the number of items in the ring buffer.  
             /// @return The number of items in the ring buffer.
-            size_t Size()
+            const size_t Size() const
             {
                 return Counter;
             }

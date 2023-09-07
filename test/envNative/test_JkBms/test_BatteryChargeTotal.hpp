@@ -4,14 +4,14 @@
 
 #include <unity.h>
 
-#include <Identifiers/TotalBatteryCycleCapacity.h>
+#include <Identifiers/BatteryChargeTotal.h>
 
 namespace test::envNative::test_JkBms
 {
     using namespace JkBms;
     using namespace JkBms::Identifiers;
     
-    void TotalBatteryCycleCapacityIdentifierSucceeds(void)
+    void BatteryChargeTotalIdentifierSucceeds(void)
     {
         std::vector<std::uint8_t> data 
         {
@@ -19,14 +19,14 @@ namespace test::envNative::test_JkBms
             0x00, 0x00, 0x00, 0x00
         };
 
-        auto sut = reinterpret_cast<TotalBatteryCycleCapacity*>(data.data());
+        auto sut = reinterpret_cast<BatteryChargeTotal*>(data.data());
 
         auto result = sut->Identifier.Value;
 
-        TEST_ASSERT_EQUAL_UINT8(Id::TotalBatteryCycleCapacity, result);
+        TEST_ASSERT_EQUAL_UINT8(Id::BatteryChargeTotal, result);
     }
 
-    void TotalBatteryCycleCapacityReturnsZero(void)
+    void BatteryChargeTotalReturnsZero(void)
     {
         std::vector<std::uint8_t> data 
         {
@@ -34,14 +34,14 @@ namespace test::envNative::test_JkBms
             0x00, 0x00, 0x00, 0x00
         };
 
-        auto sut = reinterpret_cast<TotalBatteryCycleCapacity*>(data.data());
+        auto sut = reinterpret_cast<BatteryChargeTotal*>(data.data());
 
         auto result = sut->ToAmpereHour();
 
         TEST_ASSERT_EQUAL_FLOAT(0, result.Value.GetValue());
     }
 
-    void TotalBatteryCycleCapacityReturns158965(void)
+    void BatteryChargeTotalReturns158965(void)
     {
         std::vector<std::uint8_t> data 
         {
@@ -49,16 +49,16 @@ namespace test::envNative::test_JkBms
             0x00, 0x02, 0x6C, 0xF5
         };
 
-        auto sut = reinterpret_cast<TotalBatteryCycleCapacity*>(data.data());
+        auto sut = reinterpret_cast<BatteryChargeTotal*>(data.data());
 
         auto result = sut->ToAmpereHour();
 
         TEST_ASSERT_EQUAL(158965, result.Value.GetValue());
     }
 
-    void SettingTotalBatteryCycleCapacityThrows(void)
+    void SettingBatteryChargeTotalThrows(void)
     {
-        TotalBatteryCycleCapacity sut;
+        BatteryChargeTotal sut;
         
         try
         {

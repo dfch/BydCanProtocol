@@ -8,9 +8,9 @@
 
 #include "Frame.h"
 #include "Identifiers/CellVoltage.h"
-#include "Identifiers/PowerManagementTemperature.h"
-#include "Identifiers/RemainingBatteryCapacity.h"
-#include "Identifiers/TotalBatteryCycleCapacity.h"
+#include "Identifiers/BmsTemperature.h"
+#include "Identifiers/BatteryChargeState.h"
+#include "Identifiers/BatteryChargeTotal.h"
 
 namespace JkBms
 {
@@ -36,16 +36,16 @@ namespace JkBms
                 }
                 
                 // Handling of structs with size 1 + Identifier.
-                case Id::RemainingBatteryCapacity:
+                case Id::BatteryChargeState:
                 case Id::BatteryTemperatureSensorsCount:
-                case Id::ActiveBalanceSwitch:
+                case Id::BalancerActiveFlag:
                     messages[id] = unit;
                     // We can use any struct with a size of 1 + Identifier byte here.
-                    index += sizeof(Identifiers::RemainingBatteryCapacity);
+                    index += sizeof(Identifiers::BatteryChargeState);
                     break;
 
                 // Handling of structs with size 2 + Identifier.
-                case Id::PowerManagementTemperature:
+                case Id::BmsTemperature:
                 case Id::BatteryBoxTemperature:
                 case Id::BatteryTemperature:
                 case Id::BatteryVoltage:
@@ -66,21 +66,26 @@ namespace JkBms
                 case Id::ChargeOverCurrentProtection:
                 case Id::ChargeOverCurrentDelay:
                 case Id::BalanceStartVoltage:
-                case Id::MaximumChargingVoltage:
-                case Id::MinimumDischargeVoltage:
+                case Id::MosfetTemperatureProtection:
+                case Id::MosfetTemperatureRecovery:
+                case Id::BatteryBoxTemperatureProtection:
+                case Id::BatteryBoxTemperatureRecovery:
+                case Id::BatteryTemperatureDifferenceProtection:
+                case Id::ChargeLowTemperatureProtection:
+                case Id::ChargeLowTemperatureRecovery:
                 case Id::BatteryLowVoltageShutdown:
                 case Id::BatteryLowVoltageRecovery:
                     messages[id] = unit;
                     // We can use any struct with a size of 2 + Identifier bytes here.
-                    index += sizeof(Identifiers::PowerManagementTemperature);
+                    index += sizeof(Identifiers::BmsTemperature);
                     break;
 
                 // Handling of structs with size 4 + Identifier.
-                case Id::TotalBatteryCycleCapacity:
+                case Id::BatteryChargeTotal:
                 case Id::BatteryCapacity:
                     messages[id] = unit;
                     // We can use any struct with a size of 4 + Identifier bytes here.
-                    index += sizeof(Identifiers::TotalBatteryCycleCapacity);
+                    index += sizeof(Identifiers::BatteryChargeTotal);
                     break;
 
                 default:

@@ -6,17 +6,10 @@
 
 #include "Identifier.h"
 #include "AmpereBase.h"
+#include "Scale.h"
 
 namespace JkBms::Identifiers
 {
-    #pragma pack(push, 1)
     /// @brief Represents the Charge Over Current Protection (A) of the BMS.
-    struct tagChargeOverCurrentProtection : AmpereBase
-    {
-        // Intentionally left blank
-    };
-    #pragma pack(pop)
-
-    /// @brief Represents the Charge Over Current Protection (A) of the BMS.
-    using ChargeOverCurrentProtection = tagChargeOverCurrentProtection;
+    using ChargeOverCurrentProtection = tagAmpereBase<1, 1000, Scale::Default>;
 }

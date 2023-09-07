@@ -18,9 +18,14 @@ namespace JkBms::Identifiers
 
     #pragma pack(push, 1)
     /// @brief Represents a voltage of the BMS.
-    /// The voltage is represented as milli volts.
-    struct tagMilliVoltBase
+    /// @param TMin Specifies the minimum size of the underlying value.
+    /// @param TMax Specifies the maximum size of the underlying value.
+    /// @param TSize Specifies the scaling factor to apply.
+    template<size_t TMin, size_t TMax, typename TScale>
+    struct tagVoltBase
     {
+        static_assert(std::is_enum_v<TScale>, "TScale must be an enum type.");
+
         /// @brief BMS settings identifier.
         JkBms::Identifier Identifier;
 
@@ -31,10 +36,10 @@ namespace JkBms::Identifiers
         /// @return The converted Volt.
         Volt ToVolt() const 
         {
-            auto value = Value.ToLittleEndian();
-            Contract::Expects([value] { return value >= 0; }, NAMEOF(ToVolt));
+            auto scaled = Value.ToLittleEndian();
+            Contract::Expects([scaled] { return TMin <= scaled && TMax >= scaled; }, NAMEOF(ToVolt));
 
-            Volt result(value, Scale::Milli);
+            Volt result(scaled, TScale);
 
             return result;
         }
@@ -43,16 +48,12 @@ namespace JkBms::Identifiers
         /// @param value The value to set.
         void FromVolt(Volt value)
         {
-            Contract::Expects([value] { return value.Value.GetValue() >= 0; }, NAMEOF(FromVolt));
+            auto scaled = value.Value.ScaleTo(TScale);
 
-            Value.Value = (Word) value.Value.ScaleTo(Scale::Milli);
+            Contract::Expects([value] { return TMin <= scaled && TMax >= scaled; }, NAMEOF(FromVolt));
+
+            Value.Value = scaled;
         }
     };
     #pragma pack(pop)
-
-    /// @brief Represents a voltage of the BMS.
-    /// The voltage is represented as milli volts.
-    using MilliVoltBase = tagMilliVoltBase;
-
-    
 }

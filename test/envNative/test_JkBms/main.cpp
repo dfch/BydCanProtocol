@@ -7,11 +7,11 @@
 #include "test_Rs485.hpp"
 #include "test_Validation.hpp"
 #include "test_CellVoltage.hpp"
-#include "test_PowerManagementTemperature.hpp"
+#include "test_BmsTemperature.hpp"
 #include "test_Identifier.hpp"
 #include "test_BatteryCurrent.hpp"
-#include "test_RemainingBatteryCapacity.hpp"
-#include "test_TotalBatteryCycleCapacity.hpp"
+#include "test_BatteryChargeState.hpp"
+#include "test_BatteryChargeTotal.hpp"
 
 extern "C"
 {
@@ -57,13 +57,13 @@ extern "C"
             RUN_TEST(TestingCellVoltageIdentifierSucceeds);
             RUN_TEST(TestingCellVoltageSucceeds);
             
-            // #include "test_PowerManagementTemperature.hpp"
-            RUN_TEST(TestingPowerManagementTemperatureIdentifierSucceeds);
-            RUN_TEST(TestingPowerManagementTemperatureWithInvalidMaximumThrows);
-            RUN_TEST(TestingPowerManagementTemperatureReturnsZero);
-            RUN_TEST(TestingPowerManagementTemperatureReturns100);
-            RUN_TEST(TestingPowerManagementTemperatureReturnsMinus1);
-            RUN_TEST(TestingPowerManagementTemperatureReturnsMinus40);
+            // #include "test_BmsTemperature.hpp"
+            RUN_TEST(TestingBmsTemperatureIdentifierSucceeds);
+            RUN_TEST(TestingBmsTemperatureWithInvalidMaximumThrows);
+            RUN_TEST(TestingBmsTemperatureReturnsZero);
+            RUN_TEST(TestingBmsTemperatureReturns100);
+            RUN_TEST(TestingBmsTemperatureReturnsMinus1);
+            RUN_TEST(TestingBmsTemperatureReturnsMinus40);
  
              // #include "test_Identifier.hpp"
             RUN_TEST(ValidatingNumberSucceeds);
@@ -78,17 +78,17 @@ extern "C"
             RUN_TEST(TestingCurrentDataReturnsMinus10);
             RUN_TEST(TestingCurrentDataReturnsMinus2Dot98);
             
-            // #include "test_RemainingBatteryCapacity.hpp"
-            RUN_TEST(TestingRemainingBatteryCapacityIdentifierSucceeds);
-            RUN_TEST(TestingRemainingBatteryCapacityReturnsZero);
-            RUN_TEST(RemainingBatteryCapacityReturns32);
-            RUN_TEST(RemainingBatteryCapacityReturns100);
-            RUN_TEST(RemainingBatteryCapacityThrows);
+            // #include "test_BatteryChargeState.hpp"
+            RUN_TEST(TestingBatteryChargeStateIdentifierSucceeds);
+            RUN_TEST(TestingBatteryChargeStateReturnsZero);
+            RUN_TEST(BatteryChargeStateReturns32);
+            RUN_TEST(BatteryChargeStateReturns100);
+            RUN_TEST(BatteryChargeStateThrows);
 
-            // #include "test_TotalBatteryCycleCapacity.hpp"
-            RUN_TEST(TotalBatteryCycleCapacityIdentifierSucceeds);
-            RUN_TEST(TotalBatteryCycleCapacityReturnsZero);
-            RUN_TEST(SettingTotalBatteryCycleCapacityThrows);
+            // #include "test_BatteryChargeTotal.hpp"
+            RUN_TEST(BatteryChargeTotalIdentifierSucceeds);
+            RUN_TEST(BatteryChargeTotalReturnsZero);
+            RUN_TEST(SettingBatteryChargeTotalThrows);
 
             return UNITY_END();
         }

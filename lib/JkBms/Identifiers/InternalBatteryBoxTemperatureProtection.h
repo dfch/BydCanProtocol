@@ -4,11 +4,10 @@
 
 #pragma once
 
-#include "VoltBase.h"
-#include "Scale.h"
+#include "TemperatureBase.h"
 
 namespace JkBms::Identifiers
 {
-    /// @brief Represents the battery voltage of the BMS.
-    using BatteryVoltage = tagVoltBase<0, 100, Scale::Centi>;
+    /// @brief Represents the Internal Battery Box Temperature Protection temperature (40°C to 100°C).
+    using BatteryBoxTemperatureProtection = tagTemperatureBase<40, 100>;
 }

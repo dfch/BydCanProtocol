@@ -5,9 +5,7 @@
 #pragma once
 
 #include <concepts>
-#include <cstddef>
 
-#include <Contract.h>
 #include <Word.h>
 #include <TemperatureCelsius.h>
 
@@ -19,12 +17,24 @@ namespace JkBms::Identifiers
     using namespace Endian;
     using namespace Temperature;
 
+    /// @brief Specifies a callable to be used as a getter.
+    template<typename T>
+    concept TemperatureGetter = 
+        std::invocable<T, Word> && 
+        std::same_as<std::invoke_result_t<T, Word>, TemperatureCelsius>;
+    
+    /// @brief Specifies a callable to be used as a setter.
+    template<typename CallableSetter>
+    concept TemperatureSetter = 
+        std::invocable<CallableSetter, TemperatureCelsius> && 
+        std::same_as<std::invoke_result_t<CallableSetter, TemperatureCelsius>, Word>;
+
     #pragma pack(push, 1)
     /// @brief A template for representing a temperature in degrees Celsius.
     /// @tparam TGet Getter for converting the temperature from the underlying value. 
     /// @tparam TSet Setter for converting the temperature to the underlying value.
-    template<size_t TMin, size_t TMax>
-    struct tagTemperatureBase
+    template<TemperatureGetter TGet, TemperatureSetter TSet>
+    struct tagTemperatureBaseFunc
     {
         /// @brief BMS settings identifier.
         JkBms::Identifier Identifier;
@@ -36,22 +46,16 @@ namespace JkBms::Identifiers
         /// @return The temperature in degrees Celsius.
         TemperatureCelsius ToCelsius() const 
         {
-            auto value = Value.ToLittleEndian();
-            Contract::Expects([value] { return TMin >= value && TMax <= value; }, "tagTemperatureBase::ToCelsius");
-
-            auto result = TemperatureCelsius(value);
-
-            return result;
+            return TGet()(Value);
         }
 
         /// @brief Sets the temperature to the underlying value.
         /// @param value The temperature in degrees Celsius.
         void FromCelsius(TemperatureCelsius value)
         {
-            auto t = value.GetValue();
-            Contract::Expects([value] { return TMin >= t && TMax <= t; }, "tagTemperatureBase::FromCelsius");
-
-            Value.Value = t;
+            auto result = TSet()(value);
+            
+            Value.Value = result;
         }
     };
     #pragma pack(pop)

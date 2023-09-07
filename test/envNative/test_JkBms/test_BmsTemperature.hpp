@@ -4,14 +4,14 @@
 
 #include <unity.h>
 
-#include <Identifiers/PowerManagementTemperature.h>
+#include <Identifiers/BmsTemperature.h>
 
 namespace test::envNative::test_JkBms
 {
     using namespace JkBms;
     using namespace JkBms::Identifiers;
     
-    void TestingPowerManagementTemperatureIdentifierSucceeds(void)
+    void TestingBmsTemperatureIdentifierSucceeds(void)
     {
         std::vector<std::uint8_t> data 
         {
@@ -19,14 +19,14 @@ namespace test::envNative::test_JkBms
             0x00, 0x00
         };
 
-        auto sut = reinterpret_cast<PowerManagementTemperature*>(data.data());
+        auto sut = reinterpret_cast<BmsTemperature*>(data.data());
 
         auto result = sut->Identifier.Value;
 
-        TEST_ASSERT_EQUAL_UINT8(Id::PowerManagementTemperature, result);
+        TEST_ASSERT_EQUAL_UINT8(Id::BmsTemperature, result);
     }
 
-    void TestingPowerManagementTemperatureWithInvalidMaximumThrows(void)
+    void TestingBmsTemperatureWithInvalidMaximumThrows(void)
     {
         std::vector<std::uint8_t> data 
         {
@@ -34,7 +34,7 @@ namespace test::envNative::test_JkBms
             0x00, 0x8D
         };
 
-        auto sut = reinterpret_cast<PowerManagementTemperature*>(data.data());
+        auto sut = reinterpret_cast<BmsTemperature*>(data.data());
 
         try
         {
@@ -46,7 +46,7 @@ namespace test::envNative::test_JkBms
         }
     }
 
-    void TestingPowerManagementTemperatureReturnsZero(void)
+    void TestingBmsTemperatureReturnsZero(void)
     {
         std::vector<std::uint8_t> data 
         {
@@ -54,14 +54,14 @@ namespace test::envNative::test_JkBms
             0x00, 0x00
         };
 
-        auto sut = reinterpret_cast<PowerManagementTemperature*>(data.data());
+        auto sut = reinterpret_cast<BmsTemperature*>(data.data());
 
         auto result = sut->ToCelsius();
 
         TEST_ASSERT_EQUAL(0, result.GetValue());
     }
 
-    void TestingPowerManagementTemperatureReturns100(void)
+    void TestingBmsTemperatureReturns100(void)
     {
         std::vector<std::uint8_t> data 
         {
@@ -69,14 +69,14 @@ namespace test::envNative::test_JkBms
             0x00, 0x64
         };
 
-        auto sut = reinterpret_cast<PowerManagementTemperature*>(data.data());
+        auto sut = reinterpret_cast<BmsTemperature*>(data.data());
 
         auto result = sut->ToCelsius();
 
         TEST_ASSERT_EQUAL(100, result.GetValue());
     }
 
-    void TestingPowerManagementTemperatureReturnsMinus1(void)
+    void TestingBmsTemperatureReturnsMinus1(void)
     {
         std::vector<std::uint8_t> data 
         {
@@ -84,14 +84,14 @@ namespace test::envNative::test_JkBms
             0x00, 0x65
         };
 
-        auto sut = reinterpret_cast<PowerManagementTemperature*>(data.data());
+        auto sut = reinterpret_cast<BmsTemperature*>(data.data());
 
         auto result = sut->ToCelsius();
 
         TEST_ASSERT_EQUAL(-1, result.GetValue());
     }
 
-    void TestingPowerManagementTemperatureReturnsMinus40(void)
+    void TestingBmsTemperatureReturnsMinus40(void)
     {
         std::vector<std::uint8_t> data 
         {
@@ -99,7 +99,7 @@ namespace test::envNative::test_JkBms
             0x00, 0x8C
         };
 
-        auto sut = reinterpret_cast<PowerManagementTemperature*>(data.data());
+        auto sut = reinterpret_cast<BmsTemperature*>(data.data());
 
         auto result = sut->ToCelsius();
 
