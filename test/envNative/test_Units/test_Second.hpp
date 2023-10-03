@@ -63,10 +63,10 @@ namespace test::envNative::test_Units
     {
         Hour sut;
 
-        sut.SetValue<milli>(1'500'000'000);
+        sut.SetValue<milli>(1'440'000'000);
 
         auto result = sut.GetValue();
 
-        TEST_ASSERT_EQUAL_FLOAT(25, result);
+        TEST_ASSERT_EQUAL_FLOAT(400, result);
     }
 }
