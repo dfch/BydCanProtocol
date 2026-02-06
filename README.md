@@ -36,6 +36,7 @@ Things to note:
 * All information has been dumped on a Raspberry 4 with Venus OS v3.00 (as written above) and a RS485 CAN HAT with `candump`.
 * Emulation of the battery has been done from an Espressif ESP32 (and S2, S3) with a TJA1050/1 transceiver.
 * (not really BYD related) Extended frames (with 29bit identifiier) seem to get ignored by Venus OS. So, in theory, it would be possible to connect a Venus OS to different CAN devices / batteries and have a single device aggregate the messages from each battery into a BYD message and send that to Venus OS.
+* [Here is a short video](https://youtu.be/jCrKUgiQ1pU?si=f-ODKKDfogDYReOI) that shows the emulation of a BYD LVS BatteryBox.
 
 ## Victron Communication / Identifiers
 
